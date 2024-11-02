@@ -3,10 +3,6 @@
 
 #include "collision_manager.h"
 
-#include <algorithm>
-#include <graphics.h>
-
-
 CollisionManager::CollisionManager()  = default;
 CollisionManager::~CollisionManager() = default;
 

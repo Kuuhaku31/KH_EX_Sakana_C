@@ -3,15 +3,16 @@ project(main)
 
 # 添加子目录
 add_subdirectory(game_base)
-add_subdirectory(game_manager)
+add_subdirectory(game_resources)
 add_subdirectory(game_character)
 add_subdirectory(game_state_machine)
+add_subdirectory(game_collision)
 
 # 添加可执行文件
 add_executable(${PROJECT_NAME} main.cpp)
 
 # 添加头文件
-target_include_directories(${PROJECT_NAME} PUBLIC ${Game_Character_Dir})
+target_include_directories(${PROJECT_NAME} PUBLIC ${Game_Character_Dir}/character_manager)
 
 # 添加链接库
 target_link_libraries(${PROJECT_NAME} game_character)

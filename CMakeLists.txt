@@ -12,7 +12,8 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin)
 
 # 设置文件目录
 set(Game_Base_Dir ${PROJECT_SOURCE_DIR}/src/game_base)
-set(Game_Manager_Dir ${PROJECT_SOURCE_DIR}/src/game_manager)
+set(Game_Resources_Dir ${PROJECT_SOURCE_DIR}/src/game_resources)
+set(Game_Collision_Dir ${PROJECT_SOURCE_DIR}/src/game_collision)
 set(Game_State_Machine_Dir ${PROJECT_SOURCE_DIR}/src/game_state_machine)
 set(Game_Character_Dir ${PROJECT_SOURCE_DIR}/src/game_character)
 

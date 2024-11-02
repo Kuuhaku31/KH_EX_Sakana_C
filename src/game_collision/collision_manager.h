@@ -5,7 +5,8 @@
 
 #include "collision_box.h"
 
-#include <vector>
+#include <algorithm>
+#include <graphics.h>
 
 class CollisionManager
 {

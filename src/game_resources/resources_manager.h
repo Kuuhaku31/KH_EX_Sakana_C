@@ -4,6 +4,7 @@
 #pragma once
 
 #include "atlas.h"
+#include "util.h"
 
 #include <string>
 #include <unordered_map>

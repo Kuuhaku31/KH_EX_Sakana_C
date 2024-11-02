@@ -2,7 +2,6 @@
 // resource_manager.cpp
 
 #include "resources_manager.h"
-#include "util.h"
 
 #define PATH_TO_RESOURCES "../"
 

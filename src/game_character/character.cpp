@@ -51,7 +51,7 @@ Character::on_input(const ExMessage& msg)
 }
 
 void
-Character ::on_update(float delta)
+Character::on_update(float delta)
 {
     // 首先更新状态机
     state_machine.on_update(delta);
