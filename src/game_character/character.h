@@ -13,71 +13,17 @@ public:
     Character();
     ~Character();
 
-    int
-    get_hp() const
-    {
-        return hp;
-    }
-
-    void
-    set_position(const Vector2& pos)
-    {
-        position = pos;
-    }
-
-    const Vector2&
-    get_position() const
-    {
-        return position;
-    }
-
-    void
-    set_velocity(const Vector2& vel)
-    {
-        velocity = vel;
-    }
-
-    const Vector2&
-    get_velocity() const
-    {
-        return velocity;
-    }
-
-    Vector2
-    get_logic_center() const
-    {
-        return Vector2{ position.vx, position.vy - logic_height / 2 };
-    }
-
-    void
-    set_gravity_enable(bool flag)
-    {
-        enable_gravity = flag;
-    }
-
-    CollisionBox*
-    get_hit_box() const
-    {
-        return hit_box;
-    }
-
-    CollisionBox*
-    get_hurt_box() const
-    {
-        return hurt_box;
-    }
-
-    bool
-    is_on_floor() const
-    {
-        return position.vy >= FLOOR_Y;
-    }
-
-    float
-    get_floor_y() const
-    {
-        return FLOOR_Y;
-    }
+    int            get_hp() const { return hp; }
+    void           set_position(const Vector2& pos) { position = pos; }
+    const Vector2& get_position() const { return position; }
+    void           set_velocity(const Vector2& vel) { velocity = vel; }
+    const Vector2& get_velocity() const { return velocity; }
+    Vector2        get_logic_center() const { return Vector2{ position.vx, position.vy - logic_height / 2 }; }
+    void           set_gravity_enable(bool flag) { enable_gravity = flag; }
+    CollisionBox*  get_hit_box() const { return hit_box; }
+    CollisionBox*  get_hurt_box() const { return hurt_box; }
+    bool           is_on_floor() const { return position.vy >= FLOOR_Y; }
+    float          get_floor_y() const { return FLOOR_Y; }
 
     void
     make_invulnerable()

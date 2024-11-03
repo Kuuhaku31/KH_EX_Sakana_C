@@ -52,7 +52,7 @@ public:
 
     // 设置回调函数
     void
-    set_on_collision(std::function<void()> f)
+    set_on_collide(std::function<void()> f)
     {
         on_collision = f;
     }
