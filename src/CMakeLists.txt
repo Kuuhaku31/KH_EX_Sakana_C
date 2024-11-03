@@ -8,6 +8,8 @@ add_subdirectory(game_character)
 add_subdirectory(game_state_machine)
 add_subdirectory(game_collision)
 
+# add_subdirectory(bullet_time_manager)
+
 # 添加可执行文件
 add_executable(${PROJECT_NAME} main.cpp)
 

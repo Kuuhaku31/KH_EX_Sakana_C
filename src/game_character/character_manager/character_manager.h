@@ -3,7 +3,9 @@
 
 #pragma once
 
+#include "bullet_time_manager.h"
 #include "player.h"
+
 
 class CharacterManager
 {

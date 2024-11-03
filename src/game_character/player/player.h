@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include "bullet_time_manager.h"
 #include "character.h"
 
 class Player : public Character
@@ -92,5 +93,5 @@ private:
     const float CD_ATTACK  = 0.5f;
     const float SPEED_RUN  = 300.0f;
     const float SPEED_JUMP = 780.0f;
-    const float SPEED_ROLL = 800.0f;
+    const float SPEED_ROLL = 600.0f;
 };

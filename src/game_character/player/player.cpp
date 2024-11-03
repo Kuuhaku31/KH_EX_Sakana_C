@@ -32,9 +32,12 @@ Player::on_input(const ExMessage& msg)
         case 0x53: // S
         case VK_SHIFT:
             is_roll_key_down = true;
+            break;
 
         case 0x45: // E
-            // 进入子弹时间...
+            // 进入子弹时间
+            play_audio(_T("bullet_time"), false);
+            BulletTimeManager::instance()->set_status(BulletTimeManager::Status::Entering);
             break;
 
         case VK_UP: // 向上攻击
@@ -81,7 +84,9 @@ Player::on_input(const ExMessage& msg)
             break;
 
         case 0x45: // E
-            // 退出子弹时间...
+            // 退出子弹时间
+            play_audio(_T("bullet_time"), false);
+            BulletTimeManager::instance()->set_status(BulletTimeManager::Status::Exiting);
             break;
 
         case VK_UP:    // 向上攻击

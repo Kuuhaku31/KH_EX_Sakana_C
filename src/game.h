@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include "bullet_time_manager.h"
 #include "character_manager.h"
 #include "collision_manager.h"
 #include "resources_manager.h"
@@ -67,35 +68,30 @@ run()
 
     while(is_running)
     {
-        while(peekmessage(&msg))
-        {
-            // 处理消息
-            CharacterManager::instance()->on_input(msg);
-        }
+        // 处理消息
+        while(peekmessage(&msg)) CharacterManager::instance()->on_input(msg);
 
+        // 计算帧间隔
         steady_clock::time_point frame_start = steady_clock::now();
         duration<float>          delta_time  = frame_start - last_tick;
 
         // 更新
-        CharacterManager::instance()->on_update(delta_time.count());
-        CollisionManager::instance()->process_collide();
-
-        setbkcolor(RGB(0, 0, 0));
-        cleardevice();
+        float scaled_delta = BulletTimeManager::instance()->on_update(delta_time.count()); // 利用 BulletTimeManager 更新 delta 时间
+        CharacterManager::instance()->on_update(scaled_delta);                             // 更新角色
+        CollisionManager::instance()->process_collide();                                   // 处理碰撞
 
         // 渲染
-        draw_background();
-        CharacterManager::instance()->on_render();
-        CollisionManager::instance()->on_debug_render();
-
+        setbkcolor(RGB(0, 0, 0));
+        cleardevice();
+        draw_background();                               // 绘制背景
+        CharacterManager::instance()->on_render();       // 渲染角色
+        CollisionManager::instance()->on_debug_render(); // 渲染碰撞盒
         FlushBatchDraw();
 
+        // 更新上一帧时间
         last_tick                  = frame_start;
         nanoseconds sleep_duration = frame_duration - (steady_clock::now() - frame_start);
-        if(sleep_duration > nanoseconds::zero())
-        {
-            std::this_thread::sleep_for(sleep_duration);
-        }
+        if(sleep_duration > nanoseconds::zero()) std::this_thread::sleep_for(sleep_duration);
     }
 
     EndBatchDraw();

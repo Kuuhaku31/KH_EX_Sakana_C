@@ -14,13 +14,31 @@ target_include_directories(
     ./
     ./player
     ./player/player_state_nodes
+    ./bullet_time_manager
     ./character_manager
 )
 
-# 连接 game_manager 和 game_state_machine
-target_include_directories(${PROJECT_NAME} PUBLIC ${Game_Manager_Dir} ${Game_State_Machine_Dir})
+target_include_directories(
+    ${PROJECT_NAME}
+    PUBLIC
+    ${Game_Manager_Dir}
+    ${Game_State_Machine_Dir}
+    ${Game_Bullet_Time_Manager_Dir}
+)
 
-# 连接 game_manager 和 game_state_machine
-target_include_directories(${PROJECT_NAME} PUBLIC ${Game_Resources_Dir} ${Game_State_Machine_Dir} ${Game_Collision_Dir})
+target_include_directories(
+    ${PROJECT_NAME}
+    PUBLIC
+    ${Game_Resources_Dir}
+    ${Game_State_Machine_Dir}
+    ${Game_Collision_Dir}
+)
 
-target_link_libraries(${PROJECT_NAME} game_state_machine game_collision game_resources)
+target_link_libraries(
+    ${PROJECT_NAME}
+    game_state_machine
+    game_collision
+
+    # game_bullet_time_manager
+    game_resources
+)
