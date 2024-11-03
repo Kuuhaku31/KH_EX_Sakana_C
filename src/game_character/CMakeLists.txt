@@ -24,24 +24,14 @@ target_include_directories(
 target_include_directories(
     ${PROJECT_NAME}
     PUBLIC
-    ${Game_Manager_Dir}
-    ${Game_State_Machine_Dir}
-    ${Game_Bullet_Time_Manager_Dir}
-)
-
-target_include_directories(
-    ${PROJECT_NAME}
-    PUBLIC
+    ${Game_Collision_Dir}
     ${Game_Resources_Dir}
     ${Game_State_Machine_Dir}
-    ${Game_Collision_Dir}
 )
 
 target_link_libraries(
     ${PROJECT_NAME}
-    game_state_machine
     game_collision
-
-    # game_bullet_time_manager
     game_resources
+    game_state_machine
 )

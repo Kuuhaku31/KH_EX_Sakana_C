@@ -92,7 +92,7 @@ Enemy::throw_barbs()
         int rand_x = range_random(wide_grid * i, wide_grid * (i + 1)); // 在网格内随机生成x坐标
         int rand_y = range_random(250, 500);                           // 在y轴上随机生成y坐标
 
-        barb->set_position(Vector2{ rand_x, rand_y });
+        barb->set_position(Vector2{ (float)rand_x, (float)rand_y });
         barb_list.push_back(barb);
     }
 }
