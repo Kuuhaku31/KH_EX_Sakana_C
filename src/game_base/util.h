@@ -38,6 +38,7 @@ putimage_ex(IMAGE* img, const Rect& rect_dst, const Rect& rect_src = Rect{ 0, 0,
 inline void
 load_audio(LPCTSTR path, LPCTSTR id)
 {
+
     static TCHAR str_cmd[MAX_PATH];
     _stprintf_s(str_cmd, _T("open %s alias %s"), path, id);
     mciSendString(str_cmd, NULL, 0, NULL);
@@ -47,7 +48,7 @@ inline void
 play_audio(LPCTSTR id, bool is_loop = false)
 {
     static TCHAR str_cmd[MAX_PATH];
-    _stprintf_s(str_cmd, _T("play %s %s"), id, is_loop ? _T("repeat") : _T(""));
+    _stprintf_s(str_cmd, _T("play %s %s from 0"), id, is_loop ? _T("repeat") : _T(""));
     mciSendString(str_cmd, NULL, 0, NULL);
 }
 

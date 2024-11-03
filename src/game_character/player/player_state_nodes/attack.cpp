@@ -1,17 +1,20 @@
 
 // attack //
 
-#include "character_manager.h"
 #include "player_state_nodes.h"
+
+// 攻击状态结束回调逻辑
+static void
+func()
+{
+    ((Player*)CharacterManager::instance()->get_player())->set_attacking(false);
+}
 
 PlayerAttackState::PlayerAttackState()
 {
-    timer.set_wait_time(0.3f);
+    timer.set_wait_time(TIME_ATTACK);
     timer.set_one_shot(true);
-    timer.set_on_timeout([&]() {
-        Player* player = (Player*)CharacterManager::instance()->get_player();
-        player->set_attacking(false);
-    });
+    timer.set_on_timeout(func);
 }
 
 PlayerAttackState::~PlayerAttackState() = default;
@@ -19,17 +22,15 @@ PlayerAttackState::~PlayerAttackState() = default;
 void
 PlayerAttackState::on_enter()
 {
-    // 改变角色状态
-    CharacterManager::instance()->get_player()->set_animation("attack");
-
     // 获取玩家实例指针
-    Player* player = (Player*)CharacterManager::instance()->get_player();
+    Player* p = (Player*)CharacterManager::instance()->get_player();
 
-    // 启用攻击
-    player->get_hit_box()->set_enable(true);
-    player->set_attacking(true);
-    player->on_attack();
-    timer.restart();
+    // 角色设置
+    p->set_animation("attack");         // 改变角色状态
+    p->get_hit_box()->set_enable(true); // 启用攻击
+    p->set_attacking(true);             // 设置攻击状态
+    p->on_attack();                     // 角色攻击时调用
+    timer.restart();                    // 重启攻击计时器
 
     // 更新碰撞箱位置
     update_hit_box_position();
@@ -52,34 +53,30 @@ PlayerAttackState::on_enter()
 void
 PlayerAttackState::on_update(float delta)
 {
-    timer.on_update(delta);
-    update_hit_box_position();
+    timer.on_update(delta);    // 更新计时器
+    update_hit_box_position(); // 更新碰撞箱位置
 
-    Player* player = (Player*)CharacterManager::instance()->get_player();
+    Player* p = (Player*)CharacterManager::instance()->get_player();
 
     // 状态跳出逻辑
-    // 当hp<=0时，切换到死亡状态
-    if(player->get_hp() <= 0)
+    if(p->get_hp() <= 0)
     {
-        player->switch_state("dead");
+        p->switch_state("dead"); // 当hp<=0时，切换到死亡状态
     }
-    // 攻击状态结束
-    else if(!player->get_attacking())
+    else if(!p->get_attacking()) // 攻击状态结束
     {
-        if(player->get_velocity().vy > 0)
+        if(p->get_velocity().vy > 0)
         {
-            // 切换到坠落状态
-            player->switch_state("fall");
+            p->switch_state("fall"); // 当角色下落时，切换到坠落状态
         }
-        else if(player->get_move_axis() == 0)
+        else if(p->get_move_axis() == 0)
         {
-            // 切换到待机状态
-            player->switch_state("idle");
+
+            p->switch_state("idle"); // 当角色不移动时，切换到站立状态
         }
-        else if(player->is_on_floor() && player->get_move_axis() != 0)
+        else if(p->is_on_floor() && p->get_move_axis() != 0)
         {
-            // 切换到跑动状态
-            player->switch_state("run");
+            p->switch_state("run"); // 当角色在地面上移动时，切换到奔跑状态
         }
     }
 }
@@ -87,25 +84,24 @@ PlayerAttackState::on_update(float delta)
 void
 PlayerAttackState::on_exit()
 {
-    Player* player = (Player*)CharacterManager::instance()->get_player();
+    Player* p = (Player*)CharacterManager::instance()->get_player();
 
-    // 禁用攻击
-    player->get_hit_box()->set_enable(false);
-    player->set_attacking(false);
+    p->get_hit_box()->set_enable(false); // 关闭攻击碰撞箱
+    p->set_attacking(false);             // 设置攻击状态
 }
 
 void
 PlayerAttackState::update_hit_box_position()
 {
-    Player* player = (Player*)CharacterManager::instance()->get_player();
+    Player* p = (Player*)CharacterManager::instance()->get_player();
 
-    Vector2        pos_center = player->get_logic_center(); // 获取角色逻辑中心
-    CollisionBox*  hit_boox   = player->get_hit_box();      // 获取攻击碰撞箱
-    const Vector2& size       = hit_boox->get_size();       // 获取碰撞箱大小
-    Vector2        pos_hit_box;                             // 碰撞箱位置
+    Vector2        pos_center = p->get_logic_center(); // 获取角色逻辑中心
+    CollisionBox*  hit_boox   = p->get_hit_box();      // 获取攻击碰撞箱
+    const Vector2& size       = hit_boox->get_size();  // 获取碰撞箱大小
 
     // 根据攻击方向设置碰撞箱位置
-    switch(player->get_attack_dir())
+    Vector2 pos_hit_box;
+    switch(p->get_attack_dir())
     {
     case Player::AttackDir::Up:
         pos_hit_box = { pos_center.vx, pos_center.vy - size.vy / 2 };
@@ -123,7 +119,5 @@ PlayerAttackState::update_hit_box_position()
         pos_hit_box = { pos_center.vx + size.vx / 2, pos_center.vy };
         break;
     }
-
-    // 更新碰撞箱位置
     hit_boox->set_position(pos_hit_box);
 }

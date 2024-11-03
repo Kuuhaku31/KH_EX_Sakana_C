@@ -6,7 +6,7 @@
 
 PlayerRollState::PlayerRollState()
 {
-    timer.set_wait_time(0.75f);
+    timer.set_wait_time(TIME_ROLL);
     timer.set_one_shot(true);
     timer.set_on_timeout([&]() {
         ((Player*)CharacterManager::instance()->get_player())->set_rolling(false);

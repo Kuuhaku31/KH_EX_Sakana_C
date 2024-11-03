@@ -46,5 +46,5 @@ PlayerRunState::on_update(float delta)
 void
 PlayerRunState::on_exit()
 {
-    play_audio(_T("player_run"), false); // 停止播放跑动音效
+    stop_audio(_T("player_run")); // 停止播放跑动音效
 }

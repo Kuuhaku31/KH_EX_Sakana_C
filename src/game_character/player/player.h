@@ -28,72 +28,26 @@ public:
 public:
     // 角色翻滚状态接口
 
-    void
-    set_rolling(bool flag)
-    {
-        is_rolling = flag;
-    }
+    void set_rolling(bool flag) { is_rolling = flag; }
+    bool get_rolling() const { return is_rolling; }
+    bool can_roll() const { return is_roll_cd_comp && !is_rolling && is_roll_key_down; } // 滚动CD完成,且未滚动,且按下滚动键
 
-    bool
-    get_rolling() const
-    {
-        return is_rolling;
-    }
-
-    bool
-    can_roll() const
-    {
-        // 滚动CD完成,且未滚动,且按下滚动键
-        return is_roll_cd_comp && !is_rolling && is_roll_key_down;
-    }
 
     // 角色攻击状态接口
 
-    void
-    set_attacking(bool flag)
-    {
-        is_attacking = flag;
-    }
+    void set_attacking(bool flag) { is_attacking = flag; }
+    bool get_attacking() const { return is_attacking; }
+    bool can_attack() const { return is_attack_cd_comp && !is_attacking && is_attack_key_down; } // 攻击CD完成,且未攻击,且按下攻击键
 
-    bool
-    get_attacking() const
-    {
-        return is_attacking;
-    }
-
-    bool
-    can_attack() const
-    {
-        // 攻击CD完成,且未攻击,且按下攻击键
-        return is_attack_cd_comp && !is_attacking && is_attack_key_down;
-    }
-
-    // 角色能否跳跃
-    bool
-    can_jump() const
-    {
-        return is_on_floor() && is_jump_key_down;
-    }
-
-    // 获取角色移动方向
-    int
-    get_move_axis() const
-    {
-        return is_right_key_down - is_left_key_down;
-    }
-
-    // 角色攻击方向
-    AttackDir
-    get_attack_dir() const
-    {
-        return attack_dir;
-    }
+    bool      can_jump() const { return is_on_floor() && is_jump_key_down; }         // 角色能否跳跃
+    int       get_move_axis() const { return is_right_key_down - is_left_key_down; } // 获取角色移动方向
+    AttackDir get_attack_dir() const { return attack_dir; }                          // 角色攻击方向
 
 public:
-    void on_jump();
-    void on_land();
-    void on_roll();
-    void on_attack();
+    void on_jump();   // 需要在角色跳跃时调用
+    void on_land();   // 需要在角色落地时调用
+    void on_roll();   // 需要在角色翻滚时调用
+    void on_attack(); // 需要在角色攻击时调用
 
 private:
     // 传入鼠标坐标，更新角色攻击方向

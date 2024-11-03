@@ -4,8 +4,12 @@
 
 #pragma once
 
+#include "character_manager.h"
 #include "state_node.h"
 #include "timer.h"
+
+#define TIME_ATTACK 0.3f
+#define TIME_ROLL 0.35f
 
 // 玩家攻击状态
 class PlayerAttackState : public StateNode
@@ -19,7 +23,7 @@ public:
     void on_exit() override;
 
 private:
-    Timer timer;
+    Timer timer; // 攻击状态持续时间的计时器
 
     void update_hit_box_position();
 };
