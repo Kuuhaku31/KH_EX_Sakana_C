@@ -13,9 +13,13 @@ Sword::Sword(const Vector2& pos, bool move_left)
 
     // 初始碰撞盒
     collision_box = CollisionManager::instance()->create_collision_box();
-    collision_box->set_layer_src(CollisionLayer::None);
+    collision_box->set_layer_src(CollisionLayer::Enemy);
     collision_box->set_layer_dst(CollisionLayer::Player);
     collision_box->set_size(Vector2{ 195, 10 });
+    collision_box->set_on_collide([&]() {
+        // 当剑被击中时的回调函数
+        is_valid = false;
+    });
 
     position = pos;
     velocity = Vector2{ move_left ? -SPEED_MOVE : SPEED_MOVE, 0 };

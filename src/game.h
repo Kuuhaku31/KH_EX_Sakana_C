@@ -100,10 +100,12 @@ run()
         // 渲染
         setbkcolor(RGB(0, 0, 0));
         cleardevice();
-        draw_background();                               // 绘制背景
-        CharacterManager::instance()->on_render();       // 渲染角色
-        CollisionManager::instance()->on_debug_render(); // 渲染碰撞盒
-        draw_remain_hp();                                // 绘制剩余 HP
+        draw_background();                         // 绘制背景
+        CharacterManager::instance()->on_render(); // 渲染角色
+        draw_remain_hp();                          // 绘制剩余 HP
+
+        // CollisionManager::instance()->on_debug_render(); // 渲染碰撞盒
+
         FlushBatchDraw();
 
         // 更新上一帧时间
