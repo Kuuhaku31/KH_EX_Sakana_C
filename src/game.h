@@ -18,6 +18,20 @@
 
 #define GAME_FPS 144
 
+// 绘制剩余 HP
+static void
+draw_remain_hp()
+{
+    static IMAGE* img_ui_heart = ResourcesManager::instance()->find_image("ui_heart");
+
+    Rect rect_dst = { 0, 10, img_ui_heart->getwidth(), img_ui_heart->getheight() };
+    for(int i = 0; i < CharacterManager::instance()->get_player()->get_hp(); i++)
+    {
+        rect_dst.x = 10 + i * 40;
+        putimage_ex(img_ui_heart, rect_dst);
+    }
+}
+
 
 // 绘制背景
 static void
@@ -56,6 +70,9 @@ run()
         return -1;
     }
 
+    // 循环播放背景音乐
+    play_audio(_T("bgm"), true);
+
     // 每帧的持续时间（144帧每秒）
     const nanoseconds        frame_duration(1000000000 / GAME_FPS);
     steady_clock::time_point last_tick = steady_clock::now();
@@ -86,6 +103,7 @@ run()
         draw_background();                               // 绘制背景
         CharacterManager::instance()->on_render();       // 渲染角色
         CollisionManager::instance()->on_debug_render(); // 渲染碰撞盒
+        draw_remain_hp();                                // 绘制剩余 HP
         FlushBatchDraw();
 
         // 更新上一帧时间

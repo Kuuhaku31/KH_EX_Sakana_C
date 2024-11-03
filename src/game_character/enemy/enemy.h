@@ -7,6 +7,7 @@
 #include "barb.h"
 #include "character_manager.h"
 #include "collision_manager.h"
+#include "enemy_state_nodes.h"
 #include "resources_manager.h"
 #include "sword.h"
 

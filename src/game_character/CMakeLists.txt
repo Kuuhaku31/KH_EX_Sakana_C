@@ -14,6 +14,9 @@ target_include_directories(
     ./
     ./player
     ./player/player_state_nodes
+    ./enemy
+    ./enemy/enemy_state_nodes
+    ./enemy/enemy_skills
     ./bullet_time_manager
     ./character_manager
 )

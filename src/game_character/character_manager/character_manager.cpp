@@ -26,25 +26,25 @@ void
 CharacterManager::on_update(float delta)
 {
     player->on_update(delta);
-    // enemy->on_update(delta);
+    enemy->on_update(delta);
 }
 
 void
 CharacterManager::on_render()
 {
+    enemy->on_render();
     BulletTimeManager::instance()->post_process(); // 后处理
     player->on_render();
-    // enemy->on_render();
 }
 
 CharacterManager::CharacterManager()
 {
     player = new Player();
-    // enemy  = new Enemy();
+    enemy  = new Enemy();
 }
 
 CharacterManager::~CharacterManager()
 {
     delete player;
-    // delete enemy;
+    delete enemy;
 }
