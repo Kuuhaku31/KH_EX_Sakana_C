@@ -254,6 +254,7 @@ ResourcesManager::flip_atlas(const std::string& src_id, const std::string& dst_i
     {
         IMAGE img_flipped;
         flip_image(src_atlas->get_image(i), &img_flipped);
+        dst_atlas->add_image(img_flipped);
     }
 
     atlas_pool[dst_id] = dst_atlas;

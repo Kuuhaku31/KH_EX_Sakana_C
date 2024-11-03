@@ -61,7 +61,7 @@ CollisionManager::process_collide()
         {
             // 如果未启用碰撞或者本身碰撞层级和box_src不同，或者两个碰撞箱是同一个
             if(!box_dst->enable ||
-               box_dst->layer_src != box_src->layer_src ||
+               box_dst->layer_src != box_src->layer_dst ||
                box_src == box_dst)
             {
                 continue;
@@ -71,37 +71,30 @@ CollisionManager::process_collide()
             bool is_collide_x = false;
             bool is_collide_y = false;
 
-            int box_src_center_x = box_src->position.vx + box_src->size.vx / 2;
-            int box_dst_center_x = box_dst->position.vx + box_dst->size.vx / 2;
+            // 计算碰撞盒的边界
+            int box_src_left   = box_src->position.vx - box_src->size.vx / 2;
+            int box_src_right  = box_src->position.vx + box_src->size.vx / 2;
+            int box_src_top    = box_src->position.vy - box_src->size.vy / 2;
+            int box_src_bottom = box_src->position.vy + box_src->size.vy / 2;
 
-            if(box_src_center_x < box_dst_center_x)
-            {
-                is_collide_x = (box_dst_center_x - box_src_center_x <= (box_src->size.vx / 2 + box_dst->size.vx / 2));
-            }
-            else
-            {
-                is_collide_x = (box_src_center_x - box_dst_center_x <= (box_src->size.vx / 2 + box_dst->size.vx / 2));
-            }
+            int box_dst_left   = box_dst->position.vx - box_dst->size.vx / 2;
+            int box_dst_right  = box_dst->position.vx + box_dst->size.vx / 2;
+            int box_dst_top    = box_dst->position.vy - box_dst->size.vy / 2;
+            int box_dst_bottom = box_dst->position.vy + box_dst->size.vy / 2;
 
-            int box_src_center_y = box_src->position.vy + box_src->size.vy / 2;
-            int box_dst_center_y = box_dst->position.vy + box_dst->size.vy / 2;
+            // 检查X轴方向的碰撞
+            is_collide_x = (box_src_right >= box_dst_left) && (box_src_left <= box_dst_right);
 
-            if(box_src_center_y < box_dst_center_y)
-            {
-                is_collide_y = (box_dst_center_y - box_src_center_y <= (box_src->size.vy / 2 + box_dst->size.vy / 2));
-            }
-            else
-            {
-                is_collide_y = (box_src_center_y - box_dst_center_y <= (box_src->size.vy / 2 + box_dst->size.vy / 2));
-            }
+            // 检查Y轴方向的碰撞
+            is_collide_y = (box_src_bottom >= box_dst_top) && (box_src_top <= box_dst_bottom);
 
             // 如果碰撞
             if(is_collide_x && is_collide_y)
             {
                 // 调用碰撞回调函数
-                if(box_src->on_collision)
+                if(box_dst->on_collision)
                 {
-                    box_src->on_collision();
+                    box_dst->on_collision();
                 }
             }
         }

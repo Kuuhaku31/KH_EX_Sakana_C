@@ -7,6 +7,9 @@ project(Sakana_C
 
 set(CMAKE_CXX_STANDARD 20)
 
+# 启动测试
+enable_testing()
+
 # 设置可执行文件的输出目录
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin)
 
@@ -20,3 +23,4 @@ set(Game_Bullet_Time_Manager_Dir ${PROJECT_SOURCE_DIR}/src/bullet_time_manager)
 
 # 添加子目录
 add_subdirectory(src)
+add_subdirectory(test/testA)

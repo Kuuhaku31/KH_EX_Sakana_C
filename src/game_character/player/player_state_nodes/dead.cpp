@@ -10,7 +10,7 @@ PlayerDeadState::PlayerDeadState()
     timer.set_one_shot(true);
     timer.set_on_timeout([&]() {
         // 弹出失败对话框，退出游戏
-        MessageBox(GetHWnd(), _T("Game Over!"), _T("挑战失败！"), MB_OK);
+        MessageBox(GetHWnd(), _T("YOU DEAD!"), _T("Game Over"), MB_OK | MB_ICONINFORMATION);
         exit(0);
     });
 }

@@ -6,6 +6,6 @@
 void
 EnemyDeadState::on_enter()
 {
-    MessageBox(GetHWnd(), _T("敌人死亡"), _T("挑战成功！"), MB_OK);
+    MessageBox(GetHWnd(), _T("YOU WIN!"), _T("Game Over"), MB_OK | MB_ICONINFORMATION);
     exit(0);
 }
