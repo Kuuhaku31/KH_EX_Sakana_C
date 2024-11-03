@@ -33,7 +33,6 @@ void
 CharacterManager::on_render()
 {
     enemy->on_render();
-    BulletTimeManager::instance()->post_process(); // 后处理
     player->on_render();
 }
 

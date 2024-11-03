@@ -4,8 +4,7 @@
 #pragma once
 
 #include "animation.h"
-#include "collision_manager.h"
-#include "resources_manager.h"
+#include "collision_box.h"
 
 class Sword
 {

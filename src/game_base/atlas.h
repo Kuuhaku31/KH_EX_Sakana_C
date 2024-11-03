@@ -7,7 +7,6 @@
 #include <graphics.h>
 #include <vector>
 
-
 class Atlas
 {
 public:

@@ -1,6 +1,8 @@
 
 // sword.cpp
 
+#include "collision_manager.h"
+#include "resources_manager.h"
 #include "sword.h"
 
 Sword::Sword(const Vector2& pos, bool move_left)

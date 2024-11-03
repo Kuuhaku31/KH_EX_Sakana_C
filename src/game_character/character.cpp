@@ -2,6 +2,7 @@
 // character.cpp
 
 #include "character.h"
+#include "collision_manager.h"
 
 Character::Character()
 {

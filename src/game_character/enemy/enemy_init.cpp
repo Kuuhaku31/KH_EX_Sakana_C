@@ -1,7 +1,10 @@
 
 // enemy.cpp
 
+#include "collision_manager.h"
 #include "enemy.h"
+#include "enemy_state_nodes.h"
+#include "resources_manager.h"
 
 Enemy::Enemy()
 {

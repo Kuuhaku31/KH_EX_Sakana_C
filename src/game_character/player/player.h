@@ -3,7 +3,6 @@
 
 #pragma once
 
-#include "bullet_time_manager.h"
 #include "character.h"
 
 class Player : public Character

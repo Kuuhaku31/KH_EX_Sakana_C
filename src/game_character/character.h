@@ -4,7 +4,7 @@
 #pragma once
 
 #include "animation.h"
-#include "collision_manager.h"
+#include "collision_box.h"
 #include "state_machine.h"
 
 class Character

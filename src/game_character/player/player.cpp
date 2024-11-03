@@ -1,6 +1,7 @@
 
 // player.cpp
 
+#include "bullet_time_manager.h"
 #include "player.h"
 
 void

@@ -14,6 +14,8 @@ enable_testing()
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin)
 
 # 设置文件目录
+set(Game_Dir ${PROJECT_SOURCE_DIR}/src/game)
+
 set(Game_Base_Dir ${PROJECT_SOURCE_DIR}/src/game_base)
 set(Game_Resources_Dir ${PROJECT_SOURCE_DIR}/src/game_resources)
 set(Game_Collision_Dir ${PROJECT_SOURCE_DIR}/src/game_collision)

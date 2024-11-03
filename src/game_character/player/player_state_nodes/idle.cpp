@@ -1,7 +1,6 @@
 
 // idle //
 
-#include "character_manager.h"
 #include "player_state_nodes.h"
 
 PlayerIdleState::PlayerIdleState()  = default;

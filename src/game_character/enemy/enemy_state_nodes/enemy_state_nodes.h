@@ -69,10 +69,6 @@
 #pragma once
 
 #include "character_manager.h"
-#include "enemy.h"
-#include "state_node.h"
-#include "timer.h"
-
 
 // 敌人瞄准状态
 class EnemyAimState : public StateNode

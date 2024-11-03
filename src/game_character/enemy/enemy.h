@@ -3,16 +3,9 @@
 
 #pragma once
 
-#include "animation.h"
 #include "barb.h"
 #include "character.h"
-#include "character_manager.h"
-#include "collision_manager.h"
-#include "enemy_state_nodes.h"
-#include "resources_manager.h"
 #include "sword.h"
-
-class Barb;
 
 class Enemy : public Character
 {

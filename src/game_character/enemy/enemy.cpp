@@ -3,6 +3,8 @@
 
 #include "enemy.h"
 
+#include <algorithm>
+
 static bool
 fun_del_barb(Barb* barb)
 {

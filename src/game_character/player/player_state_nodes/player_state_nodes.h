@@ -5,8 +5,6 @@
 #pragma once
 
 #include "character_manager.h"
-#include "state_node.h"
-#include "timer.h"
 
 #define TIME_ATTACK 0.3f
 #define TIME_ROLL 0.35f
@@ -33,7 +31,7 @@ class PlayerDeadState : public StateNode
 {
 public:
     PlayerDeadState();
-    ~PlayerDeadState();
+    ~PlayerDeadState() = default;
 
     void on_enter() override;
     void on_update(float delta) override;
@@ -58,7 +56,7 @@ class PlayerHurtState : public StateNode
 {
 public:
     PlayerHurtState();
-    ~PlayerHurtState();
+    ~PlayerHurtState() = default;
 
     void on_enter() override;
     void on_update(float delta) override;

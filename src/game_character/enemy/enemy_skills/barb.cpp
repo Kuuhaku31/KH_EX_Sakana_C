@@ -2,6 +2,9 @@
 // barb.cpp
 
 #include "barb.h"
+#include "character_manager.h"
+#include "collision_manager.h"
+#include "resources_manager.h"
 
 Barb::Barb()
 {
