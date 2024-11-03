@@ -22,7 +22,7 @@ Player::Player()
     hurt_box->set_size({ 40, 80 });
     hurt_box->set_layer_src(CollisionLayer::Player);
     hurt_box->set_layer_dst(CollisionLayer::None);
-    hurt_box->set_on_collision([&]() {
+    hurt_box->set_on_collide([&]() {
         decrease_hp();
     });
 
