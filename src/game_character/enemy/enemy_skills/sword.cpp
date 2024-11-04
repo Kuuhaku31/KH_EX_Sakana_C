@@ -21,6 +21,7 @@ Sword::Sword(const Vector2& pos, bool move_left)
     collision_box->set_on_collide([&]() {
         // 当剑被击中时的回调函数
         is_valid = false;
+        play_audio(_T("colliding"), false);
     });
 
     position = pos;

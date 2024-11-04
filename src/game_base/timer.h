@@ -85,6 +85,14 @@ public:
         }
     }
 
+    // 立即触发
+    void
+    shot()
+    {
+        shotted = true;
+        on_timeout();
+    }
+
 private:
     float pass_time = 0;     // 计时器已经过去的时间
     float wait_time = 0;     // 计时器等待的时间

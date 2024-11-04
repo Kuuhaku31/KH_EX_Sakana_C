@@ -3,6 +3,8 @@
 
 #include "bullet_time_manager.h"
 
+#include <graphics.h>
+
 BulletTimeManager* BulletTimeManager::manager = nullptr;
 
 BulletTimeManager*

@@ -173,6 +173,8 @@ ResourcesManager::load()
     load_audio(_T(R"(..\resources\audio\player_land.mp3)"), _T("player_land"));
     load_audio(_T(R"(..\resources\audio\player_roll.mp3)"), _T("player_roll"));
     load_audio(_T(R"(..\resources\audio\player_run.mp3)"), _T("player_run"));
+
+    load_audio(_T(R"(..\resources\audio\colliding.mp3)"), _T("colliding"));
 }
 
 IMAGE*

@@ -26,8 +26,9 @@ public:
     float          get_floor_y() const { return FLOOR_Y; }
 
     void
-    make_invulnerable()
+    make_invulnerable(bool is_blink = true)
     {
+        this->is_blink  = is_blink;
         is_invulnerable = true;
         timer_invulnerable_status.restart();
     }
@@ -62,6 +63,7 @@ protected:
     bool    is_facing_left     = true;  // 当前角色是否朝向左
     bool    enable_gravity     = true;  // 启用重力模拟
     bool    is_invulnerable    = false; // 当前是否无敌
+    bool    is_blink           = false; // 是否闪烁
     bool    is_blink_invisible = false; // 当前是否处于闪烁的不可见帧
     Timer   timer_invulnerable_status;  // 无敌状态定时器
     Timer   timer_invulnerable_blink;   // 无敌闪烁状态定时器

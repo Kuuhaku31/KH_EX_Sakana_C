@@ -3,8 +3,6 @@
 
 #pragma once
 
-#include <graphics.h>
-
 class BulletTimeManager
 {
 public:

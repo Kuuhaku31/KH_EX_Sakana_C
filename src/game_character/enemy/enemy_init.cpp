@@ -22,7 +22,19 @@ Enemy::Enemy()
     hurt_box->set_size(Vector2{ 100, 180 });
     hurt_box->set_layer_src(CollisionLayer::Enemy);
     hurt_box->set_layer_dst(CollisionLayer::None);
-    hurt_box->set_on_collide([&]() { decrease_hp(); });
+    hurt_box->set_on_collide([&]() {
+        if(is_dashing_on_floor)
+        {
+            // make_invulnerable(false);
+            // switch_state("repulsed");
+            // is_dashing_on_floor = false;
+            is_repulsed = true;
+        }
+        else
+        {
+            decrease_hp();
+        }
+    });
 
     // 初始化silk碰撞盒
     collision_box_silk = CollisionManager::instance()->create_collision_box();
@@ -256,6 +268,7 @@ Enemy::Enemy()
         state_machine.register_state("throw_barb", new EnemyThrowBarbState());
         state_machine.register_state("throw_silk", new EnemyThrowSilkState());
         state_machine.register_state("throw_sword", new EnemyThrowSwordState());
+        state_machine.register_state("repulsed", new EnemyRepulsedState());
 
         state_machine.set_entry("idle");
     }
