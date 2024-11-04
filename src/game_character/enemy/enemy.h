@@ -26,6 +26,9 @@ public:
 
     // 获取、设置自身状态 //
 
+    void set_repulsed(bool flag) { is_repulsed = flag; }
+    bool get_repulsed() const { return is_repulsed; }
+
     void set_throwing_silk(bool flag)
     {
         is_throwing_silk = flag;
@@ -43,6 +46,7 @@ public:
     bool get_dash_on_floor() const { return is_dashing_on_floor; }
 
 private:
+    bool is_repulsed         = false; // 是否正处于被击退状态
     bool is_throwing_silk    = false; // 是否正使用投射技能
     bool is_dashing_in_air   = false; // 是否正使用空中冲刺技能
     bool is_dashing_on_floor = false; // 是否正使用地面冲刺技能

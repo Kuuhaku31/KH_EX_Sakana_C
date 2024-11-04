@@ -27,6 +27,9 @@ Enemy::on_update(float delta)
     // 当vx为0时，不改变朝向
     if(velocity.vx != 0.0f) is_facing_left = (velocity.vx < 0);
 
+    // 当处于被击退状态时，反转朝向
+    if(is_repulsed) is_facing_left = !is_facing_left;
+
     // 调用父类的更新逻辑
     Character::on_update(delta);
 

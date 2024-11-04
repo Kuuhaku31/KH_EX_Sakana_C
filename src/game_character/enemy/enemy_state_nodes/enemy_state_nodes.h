@@ -15,6 +15,7 @@
 * 地面冲刺 DashOnFloor
     ->死亡
     ->闲置
+    ->被击退
 
 * 坠落 Fall
     ->死亡
@@ -64,6 +65,10 @@
 
 * 死亡 Dead
 
+* 被击退 repulsed
+    ->死亡
+    ->闲置
+
 */
 
 #pragma once
@@ -110,7 +115,7 @@ public:
     void on_update(float delta) override;
 
 private:
-    const float SPEED_DASH = 1000.0f;
+    const float SPEED_DASH = 1500.0f;
 
 private:
     Timer timer;
@@ -237,4 +242,15 @@ public:
 private:
     Timer timer_throw;
     Timer timer_switch;
+};
+
+// 敌人被击退状态
+class EnemyRepulsedState : public StateNode
+{
+public:
+    EnemyRepulsedState()  = default;
+    ~EnemyRepulsedState() = default;
+
+    void on_enter() override;
+    void on_update(float delta) override;
 };

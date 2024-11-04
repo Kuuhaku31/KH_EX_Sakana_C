@@ -16,6 +16,7 @@ Character::Character()
     timer_invulnerable_status.set_one_shot(true);
     timer_invulnerable_status.set_on_timeout([&]() {
         is_invulnerable = false;
+        is_blink        = false;
     });
 
     // 无敌闪烁状态定时器
@@ -108,7 +109,7 @@ void
 Character::on_render()
 {
     // 如果角色无敌且处于闪烁的不可见帧
-    if((is_invulnerable && is_blink_invisible))
+    if((is_invulnerable && is_blink_invisible && is_blink))
     {
         return;
     }
