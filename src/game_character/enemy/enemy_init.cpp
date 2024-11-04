@@ -25,9 +25,6 @@ Enemy::Enemy()
     hurt_box->set_on_collide([&]() {
         if(is_dashing_on_floor)
         {
-            // make_invulnerable(false);
-            // switch_state("repulsed");
-            // is_dashing_on_floor = false;
             is_repulsed = true;
         }
         else
