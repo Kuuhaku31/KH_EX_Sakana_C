@@ -86,33 +86,59 @@ public:
 
     // 添加帧，利用一个图片切割成多个帧
     void
-    add_frame(IMAGE* img, int num)
+    add_frame(IMAGE* img, int num, bool is_backward = false)
     {
         int wide = img->getwidth();
         int high = img->getheight();
 
         int wide_frame = wide / num;
-
-        for(int i = 0; i < num; i++)
+        if(is_backward)
         {
-            Rect rect_src = { i * wide_frame, 0, wide_frame, high };
-            frame_list.emplace_back(img, rect_src); // 直接在frame_list中创建一个Frame对象
+            for(int i = num - 1; i >= 0; i--)
+            {
+                Rect rect_src = { i * wide_frame, 0, wide_frame, high };
+                frame_list.emplace_back(img, rect_src); // 直接在frame_list中创建一个Frame对象
+            }
+        }
+        else
+        {
+            for(int i = 0; i < num; i++)
+            {
+                Rect rect_src = { i * wide_frame, 0, wide_frame, high };
+                frame_list.emplace_back(img, rect_src); // 直接在frame_list中创建一个Frame对象
+            }
         }
     }
 
-    // 添加帧，利用图集添加帧
+    // 添加帧，利用图集添加帧，is_backward 为 true 时，逆序添加
     void
-    add_frame(Atlas* atlas)
+    add_frame(Atlas* atlas, bool is_backward = false)
     {
-        for(int i = 0; i < atlas->get_size(); i++)
+        if(is_backward)
         {
-            IMAGE* img   = atlas->get_image(i);
-            int    img_w = img->getwidth();
-            int    img_h = img->getheight();
+            for(int i = atlas->get_size() - 1; i >= 0; i--)
+            {
+                IMAGE* img   = atlas->get_image(i);
+                int    img_w = img->getwidth();
+                int    img_h = img->getheight();
 
-            Rect rect_src = { 0, 0, img_w, img_h };
+                Rect rect_src = { 0, 0, img_w, img_h };
 
-            frame_list.emplace_back(img, rect_src);
+                frame_list.emplace_back(img, rect_src);
+            }
+        }
+        else
+        {
+            for(int i = 0; i < atlas->get_size(); i++)
+            {
+                IMAGE* img   = atlas->get_image(i);
+                int    img_w = img->getwidth();
+                int    img_h = img->getheight();
+
+                Rect rect_src = { 0, 0, img_w, img_h };
+
+                frame_list.emplace_back(img, rect_src);
+            }
         }
     }
 

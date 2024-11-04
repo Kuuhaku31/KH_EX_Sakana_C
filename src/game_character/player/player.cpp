@@ -104,8 +104,8 @@ Player::on_input(const ExMessage& msg)
 void
 Player::on_update(float delta)
 {
-    // 更新速度
-    if(hp > 0 && !is_rolling)
+    // 更新速度，如果处于翻滚、被击退状态，则不更新速度
+    if(hp > 0 && !is_rolling && !is_repulsed)
     {
         velocity.vx = get_move_axis() * SPEED_RUN;
     }

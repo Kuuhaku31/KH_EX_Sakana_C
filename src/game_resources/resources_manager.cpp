@@ -61,6 +61,7 @@ static const std ::vector<AtlasResInfo> atlas_info_list = {
     { "enemy_throw_barb_left", _T(R"(..\resources\enemy\throw_barb\%d.png)"), 8 },
     { "enemy_throw_silk_left", _T(R"(..\resources\enemy\throw_silk\%d.png)"), 17 },
     { "enemy_throw_sword_left", _T(R"(..\resources\enemy\throw_sword\%d.png)"), 16 },
+    { "enemy_repulsed_left", _T(R"(..\resources\enemy\repulsed\%d.png)"), 8 },
 
     { "enemy_vfx_dash_in_air_left", _T(R"(..\resources\enemy\vfx_dash_in_air\%d.png)"), 5 },
     { "enemy_vfx_dash_on_floor_left", _T(R"(..\resources\enemy\vfx_dash_on_floor\%d.png)"), 6 },
@@ -146,6 +147,7 @@ ResourcesManager::load()
     flip_atlas("enemy_throw_barb_left", "enemy_throw_barb_right");
     flip_atlas("enemy_throw_silk_left", "enemy_throw_silk_right");
     flip_atlas("enemy_throw_sword_left", "enemy_throw_sword_right");
+    flip_atlas("enemy_repulsed_left", "enemy_repulsed_right");
 
     flip_atlas("enemy_vfx_dash_in_air_left", "enemy_vfx_dash_in_air_right");
     flip_atlas("enemy_vfx_dash_on_floor_left", "enemy_vfx_dash_on_floor_right");

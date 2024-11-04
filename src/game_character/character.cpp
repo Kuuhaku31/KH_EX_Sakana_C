@@ -58,11 +58,6 @@ Character::on_update(float delta)
     // 首先更新状态机
     state_machine.on_update(delta);
 
-    // 当角色生命值小于等于0时
-    if(hp <= 0)
-    {
-        velocity.vx = 0;
-    }
     // 如果启用重力模拟
     if(enable_gravity)
     {

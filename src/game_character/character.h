@@ -43,6 +43,12 @@ public:
     void switch_state(const std::string& id);  // 切换状态
     void set_animation(const std::string& id); // 设置动画
 
+    void set_repulsed(bool flag) { is_repulsed = flag; }
+    bool get_repulsed() const { return is_repulsed; }
+
+    void set_facing_left(bool flag) { is_facing_left = flag; }
+    bool get_facing_left() const { return is_facing_left; }
+
 protected:
     // 角色动画组
     struct AnimationGroup
@@ -60,6 +66,7 @@ protected:
     Vector2 position;                   // 角色脚底位置
     Vector2 velocity;                   // 角色速度
     float   logic_height       = 0;     // 角色的逻辑高度
+    bool    is_repulsed        = false; // 是否正处于被击退状态
     bool    is_facing_left     = true;  // 当前角色是否朝向左
     bool    enable_gravity     = true;  // 启用重力模拟
     bool    is_invulnerable    = false; // 当前是否无敌

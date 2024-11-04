@@ -27,10 +27,12 @@ target_include_directories(
     ${Game_Collision_Dir}
     ${Game_Resources_Dir}
     ${Game_State_Machine_Dir}
+    ${Game_Effects_Dir}
 )
 
 target_link_libraries(
     ${PROJECT_NAME}
+    game_effects
     game_collision
     game_resources
     game_state_machine

@@ -23,7 +23,11 @@ Player::Player()
     hurt_box->set_layer_src(CollisionLayer::Player);
     hurt_box->set_layer_dst(CollisionLayer::None);
     hurt_box->set_on_collide([&]() {
-        decrease_hp();
+        if(hp > 0)
+        {
+            switch_state("repulsed");
+            decrease_hp();
+        }
     });
 
     // 初始化翻滚CD定时器
@@ -153,6 +157,22 @@ Player::Player()
         animation_run_right.set_anchor_mode(Animation::AnchorMode::BottomCentered);
         animation_run_right.add_frame(ResourcesManager::instance()->find_image("player_run_right"), 10);
     }
+    {
+        // repulsed 动画，是 roll 的反向动画
+        AnimationGroup& animation_repulsed = animation_pool["repulsed"];
+
+        Animation& animation_repulsed_left = animation_repulsed.ani_L;
+        animation_repulsed_left.set_interval(0.05f);
+        animation_repulsed_left.set_loop(false);
+        animation_repulsed_left.set_anchor_mode(Animation::AnchorMode::BottomCentered);
+        animation_repulsed_left.add_frame(ResourcesManager::instance()->find_image("player_roll_left"), 7, true); // 反向
+
+        Animation& animation_repulsed_right = animation_repulsed.ani_R;
+        animation_repulsed_right.set_interval(0.05f);
+        animation_repulsed_right.set_loop(false);
+        animation_repulsed_right.set_anchor_mode(Animation::AnchorMode::BottomCentered);
+        animation_repulsed_right.add_frame(ResourcesManager::instance()->find_image("player_roll_right"), 7, true); // 反向
+    }
 
     // 特效动画
     {
@@ -198,6 +218,7 @@ Player::Player()
         state_machine.register_state("jump", new PlayerJumpState());
         state_machine.register_state("roll", new PlayerRollState());
         state_machine.register_state("run", new PlayerRunState());
+        state_machine.register_state("repulsed", new PlayerRepulsedState());
 
         // 设置初始状态
         state_machine.set_entry("idle");

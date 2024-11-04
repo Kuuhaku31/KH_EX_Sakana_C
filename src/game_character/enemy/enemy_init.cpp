@@ -219,6 +219,22 @@ Enemy::Enemy()
             animation_throw_sword_right.add_frame(ResourcesManager::instance()->find_atlas("enemy_throw_sword_right"));
         }
         {
+            // repulsed //
+            AnimationGroup& animation_repulsed = animation_pool["repulsed"];
+
+            Animation& animation_repulsed_left = animation_repulsed.ani_L;
+            animation_repulsed_left.set_interval(0.05f);
+            animation_repulsed_left.set_loop(false);
+            animation_repulsed_left.set_anchor_mode(Animation::AnchorMode::BottomCentered);
+            animation_repulsed_left.add_frame(ResourcesManager::instance()->find_atlas("enemy_repulsed_left"));
+
+            Animation& animation_repulsed_right = animation_repulsed.ani_R;
+            animation_repulsed_right.set_interval(0.05f);
+            animation_repulsed_right.set_loop(false);
+            animation_repulsed_right.set_anchor_mode(Animation::AnchorMode::BottomCentered);
+            animation_repulsed_right.add_frame(ResourcesManager::instance()->find_atlas("enemy_repulsed_right"));
+        }
+        {
             // 特效 //
             animation_silk.set_interval(0.1f);
             animation_silk.set_loop(false);

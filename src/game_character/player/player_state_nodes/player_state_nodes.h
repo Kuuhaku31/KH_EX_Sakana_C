@@ -111,3 +111,14 @@ public:
     void on_enter() override;
     void on_update(float delta) override;
 };
+
+// 玩家受击后退状态
+class PlayerRepulsedState : public StateNode
+{
+public:
+    PlayerRepulsedState()  = default;
+    ~PlayerRepulsedState() = default;
+
+    void on_enter() override;
+    void on_update(float delta) override;
+};
