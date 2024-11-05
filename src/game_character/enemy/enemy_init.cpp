@@ -19,7 +19,7 @@ Enemy::Enemy()
     hit_box->set_layer_dst(CollisionLayer::Player);
 
     // 初始受伤碰撞盒
-    hurt_box->set_size(Vector2{ 100, 180 });
+    hurt_box->set_size(Vector2{ 70, 150 });
     hurt_box->set_layer_src(CollisionLayer::Enemy);
     hurt_box->set_layer_dst(CollisionLayer::None);
     hurt_box->set_on_collide([&]() {

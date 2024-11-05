@@ -30,8 +30,6 @@ public:
     void
     make_invulnerable(bool is_blink = true)
     {
-        hit_box->set_enable(false);
-
         this->is_blink  = is_blink;
         is_invulnerable = true;
         timer_invulnerable_status.restart();
