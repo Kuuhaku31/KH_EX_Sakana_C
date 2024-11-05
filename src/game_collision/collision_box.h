@@ -21,6 +21,7 @@ enum class CollisionLayer
 class CollisionBox
 {
     friend class CollisionManager;
+    friend class Debuger;
 
 public:
     // 设置碰撞盒是否启用

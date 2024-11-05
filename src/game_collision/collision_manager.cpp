@@ -2,6 +2,7 @@
 // collision_manager.cpp
 
 #include "collision_manager.h"
+#include <graphics.h>
 
 CollisionManager::CollisionManager()  = default;
 CollisionManager::~CollisionManager() = default;
@@ -98,20 +99,5 @@ CollisionManager::process_collide()
                 }
             }
         }
-    }
-}
-
-void
-CollisionManager::on_debug_render()
-{
-    // 依次渲染所有碰撞箱
-    for(CollisionBox* box : collision_box_list)
-    {
-        setlinecolor(box->enable ? 0x00FF00 : 0xFF0000);
-        rectangle(
-            box->position.vx - box->size.vx / 2,
-            box->position.vy - box->size.vy / 2,
-            box->position.vx + box->size.vx / 2,
-            box->position.vy + box->size.vy / 2);
     }
 }

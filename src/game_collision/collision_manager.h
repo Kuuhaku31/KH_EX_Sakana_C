@@ -16,8 +16,11 @@ public:
     CollisionBox* create_collision_box();
     void          destroy_collision_box(CollisionBox* box);
 
-    void process_collide();
-    void on_debug_render();
+    void                              process_collide();
+    const std::vector<CollisionBox*>& get_collision_box_list() const
+    {
+        return collision_box_list;
+    }
 
 private:
     static CollisionManager*   manager;

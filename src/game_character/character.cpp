@@ -12,13 +12,13 @@ Character::Character()
 
     // 初始化计时器
     // 无敌状态定时器
-    timer_invulnerable_status.set_wait_time(1.0f);
+    timer_invulnerable_status.set_wait_time(0.8f);
     timer_invulnerable_status.set_one_shot(true);
     timer_invulnerable_status.set_on_timeout([&]() {
         is_invulnerable = false;
         is_blink        = false;
 
-        hurt_box->set_enable(true);
+        hit_box->set_enable(true);
     });
 
     // 无敌闪烁状态定时器

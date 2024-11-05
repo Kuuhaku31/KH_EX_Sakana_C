@@ -40,6 +40,7 @@ static const std::vector<ImageResInfo> image_res_list = {
 
     { "background", _T(R"(..\resources\background.png)") },
     { "ui_heart", _T(R"(..\resources\ui_heart.png)") },
+    { "ui_heart_enemy", _T(R"(..\resources\ui_heart_enemy.png)") },
 };
 
 // 图集资源列表
