@@ -278,6 +278,7 @@ Enemy::Enemy()
         state_machine.register_state("jump", new EnemyJumpState());
         state_machine.register_state("run", new EnemyRunState());
         state_machine.register_state("squat", new EnemySquatState());
+        state_machine.register_state("shoot_barb", new EnemyShootBarbState());
         state_machine.register_state("throw_barb", new EnemyThrowBarbState());
         state_machine.register_state("throw_silk", new EnemyThrowSilkState());
         state_machine.register_state("throw_sword", new EnemyThrowSwordState());

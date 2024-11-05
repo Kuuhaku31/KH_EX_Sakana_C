@@ -17,6 +17,8 @@ Character::Character()
     timer_invulnerable_status.set_on_timeout([&]() {
         is_invulnerable = false;
         is_blink        = false;
+
+        hurt_box->set_enable(true);
     });
 
     // 无敌闪烁状态定时器

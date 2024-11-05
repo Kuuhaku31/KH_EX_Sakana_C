@@ -83,6 +83,15 @@ Enemy::on_hurt()
 }
 
 void
+Enemy::shoot_barb(const Vector2& target)
+{
+    Barb* barb = new Barb();
+    barb->set_position(get_logic_center());
+    barb->on_shoot(target); // 直接发射向玩家
+    barb_list.push_back(barb);
+}
+
+void
 Enemy::throw_barbs()
 {
     int num_new_barbs = range_random(3, 6);       // 随机生成3-6个飞刺

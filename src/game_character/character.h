@@ -17,6 +17,8 @@ public:
     void           set_position(const Vector2& pos) { position = pos; }
     const Vector2& get_position() const { return position; }
     void           set_velocity(const Vector2& vel) { velocity = vel; }
+    void           set_velocity_x(float vx) { velocity.vx = vx; }
+    void           set_velocity_y(float vy) { velocity.vy = vy; }
     const Vector2& get_velocity() const { return velocity; }
     Vector2        get_logic_center() const { return Vector2{ position.vx, position.vy - logic_height / 2 }; }
     void           set_gravity_enable(bool flag) { enable_gravity = flag; }
@@ -28,6 +30,8 @@ public:
     void
     make_invulnerable(bool is_blink = true)
     {
+        hurt_box->set_enable(false);
+
         this->is_blink  = is_blink;
         is_invulnerable = true;
         timer_invulnerable_status.restart();

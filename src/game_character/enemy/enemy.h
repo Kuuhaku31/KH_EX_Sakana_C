@@ -18,6 +18,7 @@ public:
 
     void on_hurt() override;
 
+    void shoot_barb(const Vector2& target);
     void throw_barbs();
     void throw_swords();
 

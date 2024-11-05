@@ -12,7 +12,7 @@ PlayerRepulsedState::on_enter()
 
     // 设置玩家的动画
     player->set_animation("repulsed");
-    player->set_velocity(Vector2{ player->get_facing_left() ? SPEED_REPULSED : -SPEED_REPULSED, 0 });
+    player->set_velocity_x(player->get_facing_left() ? SPEED_REPULSED : -SPEED_REPULSED);
     player->set_repulsed(true);
 }
 
@@ -36,13 +36,12 @@ PlayerRepulsedState::on_update(float delta)
     else if(v.vx * vt <= 0)
     {
         // 如果速度的方向发生了变化，直接设置速度为0，并切换到闲置状态
-        player->set_velocity(Vector2{ 0, 0 });
+        player->set_velocity_x(0);
         player->set_repulsed(false);
         player->switch_state("idle");
     }
     else
     {
-        v.vx = vt;
-        player->set_velocity(v);
+        player->set_velocity_x(vt);
     }
 }
