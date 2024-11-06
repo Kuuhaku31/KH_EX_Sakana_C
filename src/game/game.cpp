@@ -58,6 +58,7 @@ run()
         BulletTimeManager::instance()->post_process(); // 后处理
         CharacterManager::instance()->on_render();     // 渲染角色
         draw_remain_hp();                              // 绘制剩余 HP
+        draw_bullet_time_energy();                     // 绘制 bullet time 能量条
 
         // const std::vector<CollisionBox*> collision_boxes = CollisionManager::instance()->get_collision_box_list();
         // Debuger::on_debug_render(collision_boxes); // 调试渲染

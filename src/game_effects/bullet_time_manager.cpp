@@ -40,8 +40,20 @@ BulletTimeManager::set_status(Status status)
 float
 BulletTimeManager::on_update(float delta)
 {
+    bool flag = false;
+    if(status == Status::Entering)
+    {
+        if(bullet_time_energy > 0.0f)
+        {
+            // 如果有能量
+            bullet_time_energy -= delta;
+            if(bullet_time_energy < 0.0f) bullet_time_energy = 0.0f;
+            flag = true;
+        }
+    }
+
     float delta_progress = SPEED_PROGRESS * delta;
-    progress += delta_progress * (status == Status::Entering ? 1 : -1);
+    progress += delta_progress * (flag ? 1 : -1);
 
     if(progress < 0.0f) progress = 0.0f;
     if(progress > 1.0f) progress = 1.0f;
@@ -49,6 +61,13 @@ BulletTimeManager::on_update(float delta)
     delta *= lerp(1.0f, DST_DELTA_FACTOR, progress);
 
     return delta;
+}
+
+void
+BulletTimeManager::add_energy(float energy)
+{
+    bullet_time_energy += energy;
+    if(bullet_time_energy > ENERGY_MAX) bullet_time_energy = ENERGY_MAX;
 }
 
 BulletTimeManager::BulletTimeManager()  = default;

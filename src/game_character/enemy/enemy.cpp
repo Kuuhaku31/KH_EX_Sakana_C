@@ -1,6 +1,7 @@
 
 // enemy.cpp
 
+#include "bullet_time_manager.h"
 #include "enemy.h"
 
 #include <algorithm>
@@ -75,6 +76,9 @@ void
 Enemy::on_hurt()
 {
     if(is_invulnerable) return;
+
+    BulletTimeManager::instance()->add_energy(0.5f); // 击中敌人时增加子弹时间能量
+
     if(is_dashing_on_floor || is_dashing_in_air)
     {
         switch_state("repulsed");

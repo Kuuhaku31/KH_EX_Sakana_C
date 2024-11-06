@@ -57,6 +57,22 @@ draw_remain_hp()
     }
 }
 
+// 绘制 bullet time 能量条
+static void
+draw_bullet_time_energy()
+{
+    float max_energy = BulletTimeManager::instance()->get_max_energy();
+    float energy     = BulletTimeManager::instance()->get_energy();
+
+    int width     = 200;
+    int height    = 20;
+    int bar_width = width * energy / max_energy;
+
+    setfillcolor(RED);
+    solidrectangle(10, WINDOW_HEIGHT - 10 - height, 10 + width, WINDOW_HEIGHT - 10);
+    setfillcolor(GREEN);
+    solidrectangle(10, WINDOW_HEIGHT - 10 - height, 10 + bar_width, WINDOW_HEIGHT - 10);
+}
 
 // 绘制背景
 static void

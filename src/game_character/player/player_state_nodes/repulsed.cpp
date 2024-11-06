@@ -3,7 +3,7 @@
 
 #include "player_state_nodes.h"
 
-#define SPEED_REPULSED 300.0f
+#define SPEED_REPULSED 500.0f
 
 void
 PlayerRepulsedState::on_enter()

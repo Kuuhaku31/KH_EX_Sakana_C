@@ -2,6 +2,7 @@
 // barb.cpp
 
 #include "barb.h"
+#include "bullet_time_manager.h"
 #include "character_manager.h"
 #include "collision_manager.h"
 #include "resources_manager.h"
@@ -29,7 +30,10 @@ Barb::Barb()
     collision_box->set_layer_src(CollisionLayer::Enemy);
     collision_box->set_layer_dst(CollisionLayer::Player);
     collision_box->set_size({ 20, 20 });
-    collision_box->set_on_collide([&]() { on_break(); });
+    collision_box->set_on_collide([&]() {
+        on_break();
+        BulletTimeManager::instance()->add_energy(0.1f);
+    });
 
     // 初始化闲置计时器
     timer_idle.set_wait_time((float)range_random(3, 10));

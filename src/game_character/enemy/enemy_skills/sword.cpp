@@ -1,6 +1,7 @@
 
 // sword.cpp
 
+#include "bullet_time_manager.h"
 #include "collision_manager.h"
 #include "resources_manager.h"
 #include "sword.h"
@@ -22,6 +23,7 @@ Sword::Sword(const Vector2& pos, bool move_left)
         // 当剑被击中时的回调函数
         is_valid = false;
         play_audio(_T("colliding"), false);
+        BulletTimeManager::instance()->add_energy(0.3f);
     });
 
     position = pos;
