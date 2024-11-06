@@ -137,10 +137,14 @@ private:
 class EnemyDeadState : public StateNode
 {
 public:
-    EnemyDeadState()  = default;
+    EnemyDeadState();
     ~EnemyDeadState() = default;
 
     void on_enter() override;
+    void on_update(float delta) override;
+
+private:
+    Timer timer;
 };
 
 // 敌人坠落状态

@@ -2,6 +2,7 @@
 // game.cpp
 
 #include "game.h"
+#include "write_message.h"
 
 int
 run()
@@ -33,7 +34,8 @@ run()
 
     ExMessage msg;
 
-    bool is_running = true;
+    bool is_running      = true;  // 是否运行
+    bool is_have_outcome = false; // 是否有结果
 
     BeginBatchDraw();
 
@@ -51,6 +53,23 @@ run()
         CharacterManager::instance()->on_update(scaled_delta);                             // 更新角色
         CollisionManager::instance()->process_collide();                                   // 处理碰撞
 
+        // 检测输赢
+        switch(CharacterManager::instance()->get_outcome())
+        {
+        case CharacterManager::Outcome::WIN:
+            is_have_outcome = true;
+            WriteMessage::instance()->set_message(TxtType::WIN);
+            break;
+        case CharacterManager::Outcome::LOSE:
+            is_have_outcome = true;
+            WriteMessage::instance()->set_message(TxtType::DEAD);
+            break;
+        case CharacterManager::Outcome::NONE:
+            break;
+        default:
+            break;
+        }
+
         // 渲染
         setbkcolor(RGB(0, 0, 0));
         cleardevice();
@@ -59,6 +78,21 @@ run()
         CharacterManager::instance()->on_render();     // 渲染角色
         draw_remain_hp();                              // 绘制剩余 HP
         draw_bullet_time_energy();                     // 绘制 bullet time 能量条
+
+        // 绘制输赢提示
+        if(is_have_outcome)
+        {
+            WriteMessage::instance()->on_update(scaled_delta);
+            WriteMessage::instance()->post_process();
+
+            if(WriteMessage::instance()->is_done())
+            {
+                // 游戏结束
+                Sleep(2000);
+                MessageBox(hwnd, _T("Game Over"), _T("Game Over"), MB_OK | MB_ICONINFORMATION);
+                is_running = false;
+            }
+        }
 
         // const std::vector<CollisionBox*> collision_boxes = CollisionManager::instance()->get_collision_box_list();
         // Debuger::on_debug_render(collision_boxes); // 调试渲染

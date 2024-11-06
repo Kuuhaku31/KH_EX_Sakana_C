@@ -41,6 +41,8 @@ static const std::vector<ImageResInfo> image_res_list = {
     { "background", _T(R"(..\resources\background.png)") },
     { "ui_heart", _T(R"(..\resources\ui_heart.png)") },
     { "ui_heart_enemy", _T(R"(..\resources\ui_heart_enemy.png)") },
+    { "ui_txt_dead", _T(R"(..\resources\ui_txt_dead.png)") },
+    { "ui_txt_win", _T(R"(..\resources\ui_txt_win.png)") }
 };
 
 // 图集资源列表
@@ -63,6 +65,7 @@ static const std ::vector<AtlasResInfo> atlas_info_list = {
     { "enemy_throw_silk_left", _T(R"(..\resources\enemy\throw_silk\%d.png)"), 17 },
     { "enemy_throw_sword_left", _T(R"(..\resources\enemy\throw_sword\%d.png)"), 16 },
     { "enemy_repulsed_left", _T(R"(..\resources\enemy\repulsed\%d.png)"), 8 },
+    { "enemy_dead_left", _T(R"(..\resources\enemy\dead\%d.png)"), 3 },
 
     { "enemy_vfx_dash_in_air_left", _T(R"(..\resources\enemy\vfx_dash_in_air\%d.png)"), 5 },
     { "enemy_vfx_dash_on_floor_left", _T(R"(..\resources\enemy\vfx_dash_on_floor\%d.png)"), 6 },
@@ -149,6 +152,7 @@ ResourcesManager::load()
     flip_atlas("enemy_throw_silk_left", "enemy_throw_silk_right");
     flip_atlas("enemy_throw_sword_left", "enemy_throw_sword_right");
     flip_atlas("enemy_repulsed_left", "enemy_repulsed_right");
+    flip_atlas("enemy_dead_left", "enemy_dead_right");
 
     flip_atlas("enemy_vfx_dash_in_air_left", "enemy_vfx_dash_in_air_right");
     flip_atlas("enemy_vfx_dash_on_floor_left", "enemy_vfx_dash_on_floor_right");

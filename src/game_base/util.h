@@ -18,7 +18,7 @@ struct Rect
 };
 
 inline void
-putimage_ex(IMAGE* img, const Rect& rect_dst, const Rect& rect_src = Rect{ 0, 0, 0, 0 })
+putimage_a(IMAGE* img, const Rect& rect_dst, const Rect& rect_src = Rect{ 0, 0, 0, 0 })
 {
     static BLENDFUNCTION blend_func = { AC_SRC_OVER, 0, 255, AC_SRC_ALPHA };
 

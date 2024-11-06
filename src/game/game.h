@@ -46,14 +46,14 @@ draw_remain_hp()
     for(int i = 0; i < CharacterManager::instance()->get_player()->get_hp(); i++)
     {
         rect_dst.x = 10 + i * 40;
-        putimage_ex(img_ui_heart, rect_dst);
+        putimage_a(img_ui_heart, rect_dst);
     }
 
     rect_dst = { WINDOW_WIDTH - img_ui_hear_enemy->getwidth(), 10, img_ui_hear_enemy->getwidth(), img_ui_hear_enemy->getheight() };
     for(int i = 0; i < CharacterManager::instance()->get_enemy()->get_hp(); i++)
     {
         rect_dst.x = WINDOW_WIDTH - 10 - (i + 1) * 40;
-        putimage_ex(img_ui_hear_enemy, rect_dst);
+        putimage_a(img_ui_hear_enemy, rect_dst);
     }
 }
 
@@ -87,7 +87,7 @@ draw_background()
         img_background->getheight()
     };
 
-    putimage_ex(img_background, rect_dst);
+    putimage_a(img_background, rect_dst);
 }
 
 int

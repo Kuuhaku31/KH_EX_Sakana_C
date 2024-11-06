@@ -174,7 +174,7 @@ public:
             rect_dst.y = (int)(position.vy - frame.rect_src.h);
         }
 
-        putimage_ex(frame.img, rect_dst, frame.rect_src);
+        putimage_a(frame.img, rect_dst, frame.rect_src);
     }
 
 private:

@@ -4,15 +4,14 @@
 #include "bullet_time_manager.h"
 #include "character_manager.h"
 #include "player_state_nodes.h"
+#include "write_message.h"
 
 PlayerDeadState::PlayerDeadState()
 {
     timer.set_wait_time(2.0f);
     timer.set_one_shot(true);
     timer.set_on_timeout([&]() {
-        // 弹出失败对话框，退出游戏
-        MessageBox(GetHWnd(), _T("YOU DEAD!"), _T("Game Over"), MB_OK | MB_ICONINFORMATION);
-        exit(0);
+        CharacterManager::instance()->set_outcome(CharacterManager::Outcome::LOSE);
     });
 }
 
