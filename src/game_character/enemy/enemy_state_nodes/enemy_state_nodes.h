@@ -94,6 +94,7 @@ public:
 
     void on_enter() override;
     void on_update(float delta) override;
+    void on_exit() override;
 
 private:
     Timer timer;
@@ -123,6 +124,7 @@ public:
 
     void on_enter() override;
     void on_update(float delta) override;
+    void on_exit() override;
 
 private:
     const float SPEED_DASH = 1500.0f;
@@ -250,6 +252,7 @@ public:
 
     void on_enter() override;
     void on_update(float delta) override;
+    void on_exit() override;
 
 private:
     Timer timer;
@@ -279,4 +282,5 @@ public:
 
     void on_enter() override;
     void on_update(float delta) override;
+    void on_exit() override;
 };

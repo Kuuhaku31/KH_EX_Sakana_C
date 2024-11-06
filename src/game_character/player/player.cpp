@@ -157,7 +157,15 @@ Player::on_render()
 void
 Player::on_hurt()
 {
-    play_audio(_T("player_hurt"), false);
+    if(is_invulnerable) return;
+    if(hp > 0)
+    {
+        hp--;
+        switch_state("repulsed");
+        play_audio(_T("player_hurt"), false);
+
+        make_invulnerable();
+    }
 }
 
 void

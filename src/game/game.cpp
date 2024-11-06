@@ -59,8 +59,8 @@ run()
         CharacterManager::instance()->on_render();     // 渲染角色
         draw_remain_hp();                              // 绘制剩余 HP
 
-        const std::vector<CollisionBox*> collision_boxes = CollisionManager::instance()->get_collision_box_list();
-        Debuger::on_debug_render(collision_boxes); // 调试渲染
+        // const std::vector<CollisionBox*> collision_boxes = CollisionManager::instance()->get_collision_box_list();
+        // Debuger::on_debug_render(collision_boxes); // 调试渲染
 
         FlushBatchDraw();
 

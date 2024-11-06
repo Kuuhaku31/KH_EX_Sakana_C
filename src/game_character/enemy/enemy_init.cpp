@@ -22,16 +22,7 @@ Enemy::Enemy()
     hurt_box->set_size(Vector2{ 70, 150 });
     hurt_box->set_layer_src(CollisionLayer::Enemy);
     hurt_box->set_layer_dst(CollisionLayer::None);
-    hurt_box->set_on_collide([&]() {
-        if(is_dashing_on_floor)
-        {
-            is_repulsed = true;
-        }
-        else
-        {
-            decrease_hp();
-        }
-    });
+    hurt_box->set_on_collide([&]() { on_hurt(); });
 
     // 初始化silk碰撞盒
     collision_box_silk = CollisionManager::instance()->create_collision_box();
@@ -39,6 +30,8 @@ Enemy::Enemy()
     collision_box_silk->set_layer_src(CollisionLayer::None);
     collision_box_silk->set_layer_dst(CollisionLayer::Player);
     collision_box_silk->set_enable(false);
+
+    timer_invulnerable_status.set_wait_time(1.5f);
 
     // 初始化动画
     {

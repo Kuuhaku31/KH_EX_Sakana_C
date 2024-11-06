@@ -35,8 +35,6 @@ public:
         timer_invulnerable_status.restart();
     }
 
-    void decrease_hp(); // 减少生命值
-
     virtual void on_input(const ExMessage& msg); // 输入处理
     virtual void on_update(float delta);         // 更新
     virtual void on_render();                    // 渲染
@@ -49,6 +47,7 @@ public:
     bool get_repulsed() const { return is_repulsed; }
 
     void set_facing_left(bool flag) { is_facing_left = flag; }
+    void set_facing_left(const Vector2& target) { is_facing_left = target.vx < position.vx; }
     bool get_facing_left() const { return is_facing_left; }
 
 protected:
@@ -74,8 +73,9 @@ protected:
     bool    is_invulnerable    = false; // 当前是否无敌
     bool    is_blink           = false; // 是否闪烁
     bool    is_blink_invisible = false; // 当前是否处于闪烁的不可见帧
-    Timer   timer_invulnerable_status;  // 无敌状态定时器
-    Timer   timer_invulnerable_blink;   // 无敌闪烁状态定时器
+
+    Timer timer_invulnerable_status; // 无敌状态定时器
+    Timer timer_invulnerable_blink;  // 无敌闪烁状态定时器
 
     StateMachine    state_machine;               // 角色逻辑状态机
     CollisionBox*   hit_box           = nullptr; // 攻击碰撞箱

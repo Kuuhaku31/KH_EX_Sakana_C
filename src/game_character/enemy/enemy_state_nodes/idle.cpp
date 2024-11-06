@@ -165,5 +165,5 @@ EnemyIdleState::on_exit()
     Enemy*        enemy  = (Enemy*)CharacterManager::instance()->get_enemy();
     const Player* player = (Player*)CharacterManager::instance()->get_player();
 
-    enemy->set_facing_left(player->get_position().vx < enemy->get_position().vx);
+    enemy->set_facing_left(player->get_position());
 }

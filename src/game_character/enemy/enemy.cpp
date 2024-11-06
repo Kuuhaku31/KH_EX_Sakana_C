@@ -24,12 +24,6 @@ fun_del_sword(Sword* sword)
 void
 Enemy::on_update(float delta)
 {
-    // 当vx为0时，不改变朝向
-    if(velocity.vx != 0.0f) is_facing_left = (velocity.vx < 0);
-
-    // 当处于被击退状态时，反转朝向
-    if(is_repulsed) is_facing_left = !is_facing_left;
-
     // 调用父类的更新逻辑
     Character::on_update(delta);
 
@@ -37,6 +31,12 @@ Enemy::on_update(float delta)
     hit_box->set_position(get_logic_center());
 
     // 更新技能逻辑
+    on_update_skills(delta);
+}
+
+void
+Enemy::on_update_skills(float delta)
+{
     if(is_throwing_silk)
     {
         collision_box_silk->set_position(get_logic_center());
@@ -74,11 +74,26 @@ Enemy::on_render()
 void
 Enemy::on_hurt()
 {
-    switch(range_random(1, 3))
+    if(is_invulnerable) return;
+    if(is_dashing_on_floor || is_dashing_in_air)
     {
-    case 1: play_audio(_T("enemy_hurt_1"), false); break;
-    case 2: play_audio(_T("enemy_hurt_2"), false); break;
-    case 3: play_audio(_T("enemy_hurt_3"), false); break;
+        switch_state("repulsed");
+        make_invulnerable(false);
+    }
+    else
+    {
+        hp--;
+
+        switch(range_random(1, 3))
+        {
+        case 1: play_audio(_T("enemy_hurt_1"), false); break;
+        case 2: play_audio(_T("enemy_hurt_2"), false); break;
+        case 3: play_audio(_T("enemy_hurt_3"), false); break;
+        }
+
+        // 进入击退状态
+        switch_state("repulsed");
+        make_invulnerable();
     }
 }
 

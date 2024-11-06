@@ -7,7 +7,8 @@ void
 EnemyFallState::on_enter()
 {
     Enemy* enemy = (Enemy*)CharacterManager::instance()->get_enemy();
-    enemy->set_animation("fall"); // 设置坠落动画
+    enemy->set_animation("fall");    // 设置坠落动画
+    enemy->set_gravity_enable(true); // 开启重力
 }
 
 void

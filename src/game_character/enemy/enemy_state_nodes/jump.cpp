@@ -26,6 +26,7 @@ EnemyJumpState::on_update(float delta)
     }
     else if(enemy->get_velocity().vy > 0)
     {
+        enemy->set_facing_left(player->get_position());
         int rand_num = range_random(0, 100); // 生成0-100的随机数，用于决定下一个状态
         if(enemy->get_hp() > 5)
         {

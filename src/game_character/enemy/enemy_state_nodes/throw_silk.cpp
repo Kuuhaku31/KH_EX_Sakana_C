@@ -8,8 +8,6 @@ func()
 {
     Enemy* enemy = (Enemy*)CharacterManager::instance()->get_enemy();
 
-    enemy->set_gravity_enable(true); // 重力开启
-    enemy->set_throwing_silk(false); // 关闭扔丝线标志
     if(!enemy->is_on_floor() && enemy->get_hp() > 5 && range_random(0, 100) <= 25)
     {
         enemy->switch_state("aim");
@@ -55,4 +53,12 @@ EnemyThrowSilkState::on_update(float delta)
     timer.on_update(delta);
 
     if(enemy->get_hp() <= 0) enemy->switch_state("dead");
+}
+
+void
+EnemyThrowSilkState::on_exit()
+{
+    Enemy* enemy = (Enemy*)CharacterManager::instance()->get_enemy();
+    enemy->set_gravity_enable(true); // 重力开启
+    enemy->set_throwing_silk(false); // 关闭扔丝线标志
 }

@@ -12,7 +12,7 @@ Character::Character()
 
     // 初始化计时器
     // 无敌状态定时器
-    timer_invulnerable_status.set_wait_time(0.5f);
+    timer_invulnerable_status.set_wait_time(1.0f);
     timer_invulnerable_status.set_one_shot(true);
     timer_invulnerable_status.set_on_timeout([&]() {
         is_invulnerable = false;
@@ -31,20 +31,6 @@ Character::~Character()
 {
     // 销毁碰撞盒
     CollisionManager::instance()->destroy_collision_box(hit_box);
-}
-
-void
-Character::decrease_hp()
-{
-    if(is_invulnerable)
-    {
-        return;
-    }
-
-    hp--;
-
-    make_invulnerable();
-    on_hurt();
 }
 
 void
@@ -120,6 +106,7 @@ Character::on_render()
 void
 Character::on_hurt()
 {
+    hp--;
 }
 
 void

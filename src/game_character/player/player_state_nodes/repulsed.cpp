@@ -9,11 +9,12 @@ void
 PlayerRepulsedState::on_enter()
 {
     Player* player = (Player*)CharacterManager::instance()->get_player();
+    Enemy*  enemy  = (Enemy*)CharacterManager::instance()->get_enemy();
 
-    // 设置玩家的动画
+    player->set_repulsed(true);
+    player->set_facing_left(enemy->get_position());
     player->set_animation("repulsed");
     player->set_velocity_x(player->get_facing_left() ? SPEED_REPULSED : -SPEED_REPULSED);
-    player->set_repulsed(true);
 }
 
 void

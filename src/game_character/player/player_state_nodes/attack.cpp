@@ -22,14 +22,7 @@ func()
     }
     else
     {
-        if(p->get_velocity().vy > 0)
-        {
-            p->switch_state("fall"); // 当角色下落时，切换到坠落状态
-        }
-        else
-        {
-            p->switch_state("jump"); // 当角色在空中时，切换到跳跃状态
-        }
+        p->switch_state("fall"); // 当角色下落时，切换到坠落状态
     }
 }
 
@@ -101,6 +94,7 @@ void
 PlayerAttackState::on_exit()
 {
     Player* p = (Player*)CharacterManager::instance()->get_player();
+    p->get_hit_box()->set_enable(false);
     p->set_attacking(false);
 }
 
