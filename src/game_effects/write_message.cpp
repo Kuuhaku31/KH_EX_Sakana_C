@@ -65,8 +65,13 @@ write_message(TxtType type, float progress)
     case TxtType::DEAD:
         txt = ResourcesManager::instance()->find_image("ui_txt_dead");
         break;
+    case TxtType::DEAD_2:
+        txt = ResourcesManager::instance()->find_image("ui_txt_dead_2");
+        break;
     case TxtType::WIN:
         txt = ResourcesManager::instance()->find_image("ui_txt_win");
+        break;
+    default:
         break;
     }
 

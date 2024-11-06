@@ -54,20 +54,30 @@ run()
         CollisionManager::instance()->process_collide();                                   // 处理碰撞
 
         // 检测输赢
-        switch(CharacterManager::instance()->get_outcome())
+        if(!is_have_outcome)
         {
-        case CharacterManager::Outcome::WIN:
-            is_have_outcome = true;
-            WriteMessage::instance()->set_message(TxtType::WIN);
-            break;
-        case CharacterManager::Outcome::LOSE:
-            is_have_outcome = true;
-            WriteMessage::instance()->set_message(TxtType::DEAD);
-            break;
-        case CharacterManager::Outcome::NONE:
-            break;
-        default:
-            break;
+            switch(CharacterManager::instance()->get_outcome())
+            {
+            case CharacterManager::Outcome::WIN:
+                is_have_outcome = true;
+                WriteMessage::instance()->set_message(TxtType::WIN);
+                break;
+            case CharacterManager::Outcome::LOSE:
+                is_have_outcome = true;
+                if(range_random(0, 9))
+                {
+                    WriteMessage::instance()->set_message(TxtType::DEAD);
+                }
+                else
+                {
+                    WriteMessage::instance()->set_message(TxtType::DEAD_2);
+                }
+                break;
+            case CharacterManager::Outcome::NONE:
+                break;
+            default:
+                break;
+            }
         }
 
         // 渲染

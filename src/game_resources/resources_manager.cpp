@@ -42,6 +42,7 @@ static const std::vector<ImageResInfo> image_res_list = {
     { "ui_heart", _T(R"(..\resources\ui_heart.png)") },
     { "ui_heart_enemy", _T(R"(..\resources\ui_heart_enemy.png)") },
     { "ui_txt_dead", _T(R"(..\resources\ui_txt_dead.png)") },
+    { "ui_txt_dead_2", _T(R"(..\resources\ui_txt_dead_2.png)") },
     { "ui_txt_win", _T(R"(..\resources\ui_txt_win.png)") }
 };
 

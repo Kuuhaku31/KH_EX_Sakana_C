@@ -6,6 +6,7 @@
 enum class TxtType
 {
     DEAD,
+    DEAD_2,
     WIN
 };
 
