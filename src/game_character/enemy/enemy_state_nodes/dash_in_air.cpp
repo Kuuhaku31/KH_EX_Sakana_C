@@ -9,7 +9,8 @@ EnemyDashInAirState::on_enter()
     Enemy*        enemy  = (Enemy*)CharacterManager::instance()->get_enemy();
     const Player* player = (Player*)CharacterManager::instance()->get_player();
 
-    Vector2 pos_target = Vector2{ player->get_position().vx, player->get_position().vy };
+    Vector2 pos_target = player->get_position(); // 获取玩家位置
+    enemy->set_facing_left(pos_target);          // 设置面向玩家
 
     enemy->set_animation("dash_in_air");                                             // 设置空中冲刺动画
     enemy->set_velocity((pos_target - enemy->get_position()).tounit() * SPEED_DASH); // 设置速度

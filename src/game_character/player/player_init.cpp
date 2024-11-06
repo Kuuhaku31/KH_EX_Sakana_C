@@ -22,13 +22,7 @@ Player::Player()
     hurt_box->set_size({ 40, 80 });
     hurt_box->set_layer_src(CollisionLayer::Player);
     hurt_box->set_layer_dst(CollisionLayer::None);
-    hurt_box->set_on_collide([&]() {
-        if(hp > 0)
-        {
-            switch_state("repulsed");
-            decrease_hp();
-        }
-    });
+    hurt_box->set_on_collide([&]() { on_hurt(); });
 
     // 初始化翻滚CD定时器
     timer_roll_cd.set_wait_time(CD_ROLL);

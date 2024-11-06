@@ -48,10 +48,10 @@ Barb::Barb()
     timer_aim.set_on_timeout([&]() {
         if(stage == Stage::Aim)
         {
-            // 切换状态，设置速度
-            stage                     = Stage::Dash;
-            const Vector2& player_pos = CharacterManager::instance()->get_player()->get_position();
-            velocity                  = (player_pos - current_position).tounit() * SPEED_DASH;
+            Player* player = (Player*)CharacterManager::instance()->get_player();
+            Vector2 target = player->get_logic_center();
+            target.vy -= 30;
+            on_shoot(target);
         }
     });
 }
@@ -102,6 +102,16 @@ void
 Barb::on_render()
 {
     current_animation->on_render();
+}
+
+// 向玩家发射
+void
+Barb::on_shoot(const Vector2& target)
+{
+    // 切换状态，设置速度
+    stage = Stage::Dash;
+
+    velocity = (target - current_position).tounit() * SPEED_DASH;
 }
 
 void

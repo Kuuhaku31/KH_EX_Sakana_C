@@ -8,7 +8,6 @@ func()
 {
     Enemy* enemy = (Enemy*)CharacterManager::instance()->get_enemy();
     enemy->switch_state("dash_in_air"); // 切换到空中冲刺状态
-    enemy->set_gravity_enable(true);    // 重力开启
 }
 
 EnemyAimState::EnemyAimState()
@@ -37,4 +36,11 @@ EnemyAimState::on_update(float delta)
     timer.on_update(delta); // 更新定时器
 
     if(enemy->get_hp() <= 0) enemy->switch_state("dead"); // 如果敌人死亡
+}
+
+void
+EnemyAimState::on_exit()
+{
+    Enemy* enemy = (Enemy*)CharacterManager::instance()->get_enemy();
+    enemy->set_gravity_enable(true); // 重力开启
 }

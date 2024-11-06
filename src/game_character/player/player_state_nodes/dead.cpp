@@ -1,6 +1,7 @@
 
 // dead //
 
+#include "bullet_time_manager.h"
 #include "character_manager.h"
 #include "player_state_nodes.h"
 
@@ -18,6 +19,8 @@ PlayerDeadState::PlayerDeadState()
 void
 PlayerDeadState::on_enter()
 {
+    // 退出子弹时间
+    BulletTimeManager::instance()->set_status(BulletTimeManager::Status::Exiting);
     CharacterManager::instance()->get_player()->set_animation("dead");
     play_audio(_T("player_dead"), false);
 }
@@ -33,17 +36,16 @@ PlayerDeadState::on_update(float delta)
     const float AIR_RESISTANCE = 10;
 
     // 减速
-    Vector2 v  = player->get_velocity();
-    float   vt = v.vx > 0 ? v.vx - AIR_RESISTANCE : v.vx + AIR_RESISTANCE;
+    float vx = player->get_velocity().vx;
+    float vt = vx > 0 ? vx - AIR_RESISTANCE : vx + AIR_RESISTANCE;
 
-    if(v.vx * vt <= 0)
+    if(vx * vt <= 0)
     {
         // 如果速度的方向发生了变化，直接设置速度为0
-        player->set_velocity(Vector2{ 0, 0 });
+        player->set_velocity_x(0);
     }
     else
     {
-        v.vx = vt;
-        player->set_velocity(v);
+        player->set_velocity_x(vt);
     }
 }

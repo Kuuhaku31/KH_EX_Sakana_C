@@ -28,6 +28,7 @@
     ->奔跑
     ->下蹲
     ->扔刺球
+    ->射刺球
     ->扔丝线
     ->扔剑
 
@@ -36,6 +37,7 @@
     ->瞄准
     ->坠落
     ->扔丝线
+    ->射刺球
 
 * 奔跑 Run
     ->死亡
@@ -49,6 +51,14 @@
 * 扔刺球 ThrowBarb
     ->死亡
     ->闲置
+
+* 射刺球 ShootBarb
+    ->死亡
+    ->下蹲
+    ->跳跃
+    ->闲置
+    ->扔丝线
+    ->坠落
 
 * 扔丝线 ThrowSilk
     ->死亡
@@ -84,6 +94,7 @@ public:
 
     void on_enter() override;
     void on_update(float delta) override;
+    void on_exit() override;
 
 private:
     Timer timer;
@@ -113,6 +124,7 @@ public:
 
     void on_enter() override;
     void on_update(float delta) override;
+    void on_exit() override;
 
 private:
     const float SPEED_DASH = 1500.0f;
@@ -215,6 +227,22 @@ private:
     Timer timer;
 };
 
+// 敌人射刺球状态
+class EnemyShootBarbState : public StateNode
+{
+public:
+    EnemyShootBarbState();
+    ~EnemyShootBarbState() = default;
+
+    void on_enter() override;
+    void on_update(float delta) override;
+    void on_exit() override;
+
+private:
+    Timer timer_shoot;
+    Timer timer_switch;
+};
+
 // 敌人扔丝线状态
 class EnemyThrowSilkState : public StateNode
 {
@@ -224,6 +252,7 @@ public:
 
     void on_enter() override;
     void on_update(float delta) override;
+    void on_exit() override;
 
 private:
     Timer timer;
@@ -253,4 +282,5 @@ public:
 
     void on_enter() override;
     void on_update(float delta) override;
+    void on_exit() override;
 };

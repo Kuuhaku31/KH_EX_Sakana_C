@@ -20,10 +20,11 @@ EnemySquatState::EnemySquatState()
 void
 EnemySquatState::on_enter()
 {
-    Enemy* enemy = (Enemy*)CharacterManager::instance()->get_enemy();
+    Enemy*  enemy  = (Enemy*)CharacterManager::instance()->get_enemy();
+    Player* player = (Player*)CharacterManager::instance()->get_player();
 
     enemy->set_animation("squat");
-    enemy->set_facing_left(enemy->get_position().vx > CharacterManager::instance()->get_player()->get_position().vx);
+    enemy->set_facing_left(player->get_position());
     timer.restart();
 }
 

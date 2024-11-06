@@ -34,20 +34,6 @@ Character::~Character()
 }
 
 void
-Character::decrease_hp()
-{
-    if(is_invulnerable)
-    {
-        return;
-    }
-
-    hp--;
-
-    make_invulnerable();
-    on_hurt();
-}
-
-void
 Character::on_input(const ExMessage& msg)
 {
 }
@@ -120,6 +106,7 @@ Character::on_render()
 void
 Character::on_hurt()
 {
+    hp--;
 }
 
 void

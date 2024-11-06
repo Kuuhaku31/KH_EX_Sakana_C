@@ -15,6 +15,8 @@ public:
     void on_update(float delta);
     void on_render();
 
+    void on_shoot(const Vector2& target);
+
     void set_position(const Vector2& pos) { base_position = current_position = pos; }
     bool check_valid() const { return is_valid; }
 

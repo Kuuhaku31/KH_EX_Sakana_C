@@ -17,17 +17,43 @@
 
 #define GAME_FPS 144
 
+class Debuger
+{
+public:
+    static void on_debug_render(const std::vector<CollisionBox*>& collision_boxes)
+    {
+        // 依次渲染所有碰撞箱
+        for(CollisionBox* box : collision_boxes)
+        {
+            setlinecolor(box->enable ? 0x00FF00 : 0xFF0000);
+            rectangle(
+                box->position.vx - box->size.vx / 2,
+                box->position.vy - box->size.vy / 2,
+                box->position.vx + box->size.vx / 2,
+                box->position.vy + box->size.vy / 2);
+        }
+    }
+};
+
 // 绘制剩余 HP
 static void
 draw_remain_hp()
 {
-    static IMAGE* img_ui_heart = ResourcesManager::instance()->find_image("ui_heart");
+    static IMAGE* img_ui_heart      = ResourcesManager::instance()->find_image("ui_heart");
+    static IMAGE* img_ui_hear_enemy = ResourcesManager::instance()->find_image("ui_heart_enemy");
 
     Rect rect_dst = { 0, 10, img_ui_heart->getwidth(), img_ui_heart->getheight() };
     for(int i = 0; i < CharacterManager::instance()->get_player()->get_hp(); i++)
     {
         rect_dst.x = 10 + i * 40;
         putimage_ex(img_ui_heart, rect_dst);
+    }
+
+    rect_dst = { WINDOW_WIDTH - img_ui_hear_enemy->getwidth(), 10, img_ui_hear_enemy->getwidth(), img_ui_hear_enemy->getheight() };
+    for(int i = 0; i < CharacterManager::instance()->get_enemy()->get_hp(); i++)
+    {
+        rect_dst.x = WINDOW_WIDTH - 10 - (i + 1) * 40;
+        putimage_ex(img_ui_hear_enemy, rect_dst);
     }
 }
 

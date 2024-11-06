@@ -7,7 +7,23 @@
 static void
 func()
 {
-    ((Player*)CharacterManager::instance()->get_player())->set_attacking(false);
+    Player* p = ((Player*)CharacterManager::instance()->get_player());
+
+    if(p->is_on_floor())
+    {
+        if(p->get_move_axis() == 0)
+        {
+            p->switch_state("idle"); // 当角色不移动时，切换到站立状态
+        }
+        else
+        {
+            p->switch_state("run"); // 当角色在地面上移动时，切换到奔跑状态
+        }
+    }
+    else
+    {
+        p->switch_state("fall"); // 当角色下落时，切换到坠落状态
+    }
 }
 
 PlayerAttackState::PlayerAttackState()
@@ -15,6 +31,12 @@ PlayerAttackState::PlayerAttackState()
     timer.set_wait_time(TIME_ATTACK);
     timer.set_one_shot(true);
     timer.set_on_timeout(func);
+
+    timer_stop_hit_box.set_wait_time(0.05f);
+    timer_stop_hit_box.set_one_shot(true);
+    timer_stop_hit_box.set_on_timeout([&]() {
+        ((Player*)CharacterManager::instance()->get_player())->get_hit_box()->set_enable(false);
+    });
 }
 
 PlayerAttackState::~PlayerAttackState() = default;
@@ -31,6 +53,7 @@ PlayerAttackState::on_enter()
     p->set_attacking(true);             // 设置攻击状态
     p->on_attack();                     // 角色攻击时调用
     timer.restart();                    // 重启攻击计时器
+    timer_stop_hit_box.restart();       // 重启停止攻击碰撞盒计时器
 
     // 更新碰撞箱位置
     update_hit_box_position();
@@ -53,7 +76,9 @@ PlayerAttackState::on_enter()
 void
 PlayerAttackState::on_update(float delta)
 {
-    timer.on_update(delta);    // 更新计时器
+    timer.on_update(delta);              // 更新计时器
+    timer_stop_hit_box.on_update(delta); // 更新停止攻击碰撞盒计时器
+
     update_hit_box_position(); // 更新碰撞箱位置
 
     Player* p = (Player*)CharacterManager::instance()->get_player();
@@ -63,31 +88,14 @@ PlayerAttackState::on_update(float delta)
     {
         p->switch_state("dead"); // 当hp<=0时，切换到死亡状态
     }
-    else if(!p->get_attacking()) // 攻击状态结束
-    {
-        if(p->get_velocity().vy > 0)
-        {
-            p->switch_state("fall"); // 当角色下落时，切换到坠落状态
-        }
-        else if(p->get_move_axis() == 0)
-        {
-
-            p->switch_state("idle"); // 当角色不移动时，切换到站立状态
-        }
-        else if(p->is_on_floor() && p->get_move_axis() != 0)
-        {
-            p->switch_state("run"); // 当角色在地面上移动时，切换到奔跑状态
-        }
-    }
 }
 
 void
 PlayerAttackState::on_exit()
 {
     Player* p = (Player*)CharacterManager::instance()->get_player();
-
-    p->get_hit_box()->set_enable(false); // 关闭攻击碰撞箱
-    p->set_attacking(false);             // 设置攻击状态
+    p->get_hit_box()->set_enable(false);
+    p->set_attacking(false);
 }
 
 void

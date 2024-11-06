@@ -15,7 +15,10 @@ EnemyJumpState::on_enter()
 void
 EnemyJumpState::on_update(float delta)
 {
-    Enemy* enemy = (Enemy*)CharacterManager::instance()->get_enemy();
+    Enemy*  enemy  = (Enemy*)CharacterManager::instance()->get_enemy();
+    Player* player = (Player*)CharacterManager::instance()->get_player();
+
+    int distance = (player->get_position() - enemy->get_position()).module();
 
     if(enemy->get_hp() <= 0)
     {
@@ -23,35 +26,44 @@ EnemyJumpState::on_update(float delta)
     }
     else if(enemy->get_velocity().vy > 0)
     {
+        enemy->set_facing_left(player->get_position());
         int rand_num = range_random(0, 100); // 生成0-100的随机数，用于决定下一个状态
         if(enemy->get_hp() > 5)
         {
-            if(rand_num <= 50)
+            if(rand_num <= 40)
             {
                 enemy->switch_state("aim");
             }
             else if(rand_num <= 80)
             {
-                enemy->switch_state("fall");
+                enemy->switch_state("shoot_barb");
+            }
+            else if(rand_num <= 90 && distance < 300)
+            {
+                enemy->switch_state("throw_silk");
             }
             else
             {
-                enemy->switch_state("throw_silk");
+                enemy->switch_state("fall");
             }
         }
         else
         {
-            if(rand_num <= 50)
+            if(rand_num <= 60)
             {
-                enemy->switch_state("throw_silk");
+                enemy->switch_state("aim");
             }
             else if(rand_num <= 80)
             {
-                enemy->switch_state("fall");
+                enemy->switch_state("shoot_barb");
+            }
+            else if(rand_num <= 90 && distance < 300)
+            {
+                enemy->switch_state("throw_silk");
             }
             else
             {
-                enemy->switch_state("aim");
+                enemy->switch_state("fall");
             }
         }
     }

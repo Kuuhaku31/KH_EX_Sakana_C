@@ -21,7 +21,8 @@ public:
     void on_exit() override;
 
 private:
-    Timer timer; // 攻击状态持续时间的计时器
+    Timer timer;              // 攻击状态持续时间的计时器
+    Timer timer_stop_hit_box; // 停止攻击碰撞盒的计时器
 
     void update_hit_box_position();
 };

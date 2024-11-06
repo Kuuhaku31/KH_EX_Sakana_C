@@ -18,6 +18,9 @@ public:
 
     void on_hurt() override;
 
+    void on_update_skills(float delta); // 更新技能逻辑
+
+    void shoot_barb(const Vector2& target);
     void throw_barbs();
     void throw_swords();
 
@@ -38,6 +41,8 @@ public:
 
     void set_dash_on_floor(bool flag) { is_dashing_on_floor = flag; }
     bool get_dash_on_floor() const { return is_dashing_on_floor; }
+
+    void set_hit_box_enable(bool flag) { hit_box->set_enable(flag); }
 
 private:
     bool is_throwing_silk    = false; // 是否正使用投射技能

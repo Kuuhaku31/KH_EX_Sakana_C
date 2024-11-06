@@ -18,7 +18,7 @@ public:
     bool check_valid() const { return is_valid; }
 
 private:
-    const float SPEED_MOVE = 1250.0f;
+    const float SPEED_MOVE = 2000.0f;
 
 private:
     Vector2   position;        // 位置

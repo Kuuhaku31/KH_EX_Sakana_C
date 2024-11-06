@@ -7,7 +7,7 @@ static void
 func()
 {
     Enemy* enemy = (Enemy*)CharacterManager::instance()->get_enemy();
-    enemy->set_dash_on_floor(false); // 清除地面冲刺标志
+    enemy->switch_state("idle"); // 如果敌人不再地面冲刺
 }
 
 EnemyDashOnFloorState::EnemyDashOnFloorState()
@@ -42,13 +42,11 @@ EnemyDashOnFloorState::on_update(float delta)
     {
         enemy->switch_state("dead"); // 如果敌人死亡
     }
-    else if(!enemy->get_dash_on_floor())
-    {
-        enemy->switch_state("idle"); // 如果敌人不再地面冲刺
-    }
-    else if(enemy->get_repulsed())
-    {
-        timer.shot();                    // 立即触发定时器
-        enemy->switch_state("repulsed"); // 如果敌人被击退
-    }
+}
+
+void
+EnemyDashOnFloorState::on_exit()
+{
+    Enemy* enemy = (Enemy*)CharacterManager::instance()->get_enemy();
+    enemy->set_dash_on_floor(false); // 清除地面冲刺标志
 }
