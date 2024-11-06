@@ -164,7 +164,7 @@ Player::on_hurt()
         switch_state("repulsed");
         play_audio(_T("player_hurt"), false);
 
-        make_invulnerable();
+        make_invulnerable(1.0f, true);
     }
 }
 

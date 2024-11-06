@@ -28,10 +28,11 @@ public:
     float          get_floor_y() const { return FLOOR_Y; }
 
     void
-    make_invulnerable(bool is_blink = true)
+    make_invulnerable(float time, bool is_blink)
     {
         this->is_blink  = is_blink;
         is_invulnerable = true;
+        timer_invulnerable_status.set_wait_time(time);
         timer_invulnerable_status.restart();
     }
 

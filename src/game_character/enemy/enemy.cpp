@@ -78,7 +78,7 @@ Enemy::on_hurt()
     if(is_dashing_on_floor || is_dashing_in_air)
     {
         switch_state("repulsed");
-        make_invulnerable(false);
+        make_invulnerable(0.5f, false);
     }
     else
     {
@@ -93,7 +93,7 @@ Enemy::on_hurt()
 
         // 进入击退状态
         switch_state("repulsed");
-        make_invulnerable();
+        make_invulnerable(1.5f, true);
     }
 }
 
